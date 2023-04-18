@@ -20,7 +20,8 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:import/recommended",
         "airbnb-typescript/base",
-        "plugin:import/typescript"
+        "plugin:import/typescript",
+        "prettier"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [

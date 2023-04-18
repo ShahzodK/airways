@@ -1,2 +1,0 @@
-# airways
-flight booking application

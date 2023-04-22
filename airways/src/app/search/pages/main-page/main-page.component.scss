@@ -1,0 +1,120 @@
+.main {
+  height: 100vh;
+}
+.search-form {
+  position: absolute;
+  display: flex;
+  padding: 24px;
+  margin-top: 62px;
+  width: 580px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  left: calc(50% - 580px/2 - 271px);
+  form {
+    width: 580px;
+  }
+  &-trip-type {
+    &-block {
+      display: flex;
+      gap: 60px;
+    }
+    &-field {
+      width: 100%;
+    }
+  }
+  &-trip-location {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    .input-text {
+      font-size: 12px;
+      position: absolute;
+      left: 16px;
+    }
+    .from {
+      top: 8px;
+    }
+    .destination {
+      top: 79px;
+    }
+    &-input {
+      font-size: 16px;
+      width: 532px;
+      padding: 24px 16px;
+      padding-bottom: 16px;
+      border: 0.5px solid rgba(116, 118, 122, 0.6);
+      border-radius: 4px;
+      background: #F4F6F9;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
+    &-departure {
+      margin-bottom: 4px;
+    }
+    &-destination {
+      margin-bottom: 28px;
+    }
+  }
+  &-trip {
+    &-date {
+      color: black;
+      border-color: black;
+      width: 311px;
+    }
+    &-info {
+      display: flex;
+      gap: 20px;
+    }
+    &-passenger {
+      position: relative;
+      &-dropdown {
+        display: inline-block;
+        font-size: 16px;
+        text-align: left;
+        width: 235px;
+        height: 59px;
+        padding-left: 16px;
+        background: #F4F6F9;
+        border-radius: 4px;
+        border: 0.5px solid rgba(116, 118, 122, 0.6);
+      }
+    }
+  }
+  &-search-button {
+    background: #11397E;
+    border-radius: 4px;
+    color: white !important;
+    padding: 23px 37px;
+    &-container {
+      display: flex;
+      justify-content: right;
+      margin-right: 13px;
+    }
+  }
+}
+::ng-deep .mat-mdc-text-field-wrapper {
+  background: #F4F6F9 !important;
+  border: 0.5px solid rgba(116, 118, 122, 0.6);
+  border-radius: 4px !important;
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color: black !important;
+}
+
+.arrow {
+  &-container {
+    position: absolute;
+    top: 16px;
+    right: 17px;
+    z-index: 100;
+  }
+  padding: 3px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+}
+
+.down {
+  transform: rotate(45deg);
+}

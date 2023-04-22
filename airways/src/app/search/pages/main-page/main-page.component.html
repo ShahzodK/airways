@@ -1,0 +1,62 @@
+<section class="main">
+  <div class="search-form">
+    <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+      <div class="search-form-trip-type-field">
+        <mat-radio-group class="search-form-trip-type-block" formControlName="tripType">
+          <mat-radio-button class="search-form-trip-type" value="1" color="primary">Round Trip</mat-radio-button>
+          <mat-radio-button class="search-form-trip-type" value="2" color="primary">One Way</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="search-form-trip-location">
+            <input type="text"
+                   formControlName="departure"
+                   [matAutocomplete]="departureAuto"
+                   placeholder="Choose your departure"
+                   class="search-form-trip-location-departure search-form-trip-location-input" [value]="'ffrrf'">
+                   <span class="from input-text">From</span>
+          <input type="text"
+                 placeholder="Choose your destination"
+                 formControlName="destination"
+                 matInput
+                 [matAutocomplete]="destinationAuto"
+                 class="search-form-trip-location-destination search-form-trip-location-input">
+                 <span class="destination input-text">Destination</span>
+          <mat-autocomplete #departureAuto="matAutocomplete">
+            <mat-option></mat-option>
+          </mat-autocomplete>
+          <mat-autocomplete #destinationAuto="matAutocomplete">
+            <mat-option></mat-option>
+          </mat-autocomplete>
+        </div>
+        <div class="search-form-trip-info">
+          <mat-form-field class="search-form-trip-date" appearance="fill">
+            <mat-label>Date</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [dateFilter]="dateFilter">
+              <input matStartDate class="search-form-trip-date-input" formControlName="start">
+              <input matEndDate class="search-form-trip-date-input" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <div class="search-form-trip-passenger">
+            <p class="arrow-container"><i class="arrow down"></i></p>
+            <input type="button"
+                   [matMenuTriggerFor]="menu"
+                   class="search-form-trip-passenger-dropdown"
+                   [value]="'Passengers' | totalPassengers: mainService.adultCount : mainService.childCount : mainService.infantCount"
+                   #passengersInput
+                   >
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="$event.stopPropagation()" class="passengers-item" (click)="updatePassengers()"><app-passenger-counter passengerType="Adults" passengerYear="14+"></app-passenger-counter></button>
+              <button mat-menu-item (click)="$event.stopPropagation()" class="passengers-item" (click)="updatePassengers()"><app-passenger-counter passengerType="Child" passengerYear="2-14"></app-passenger-counter></button>
+              <button mat-menu-item (click)="$event.stopPropagation()" class="passengers-item" (click)="updatePassengers()"><app-passenger-counter passengerType="Infant" passengerYear="0-2"></app-passenger-counter></button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="search-form-search-button-container">
+          <button class="search-form-search-button" mat-button>Search</button>
+        </div>
+    </form>
+  </div>
+</section>

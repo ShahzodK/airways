@@ -1,5 +1,4 @@
-:host {
-  display: block;
+.background-opacity {
   background-color: rgba(116, 118, 122, 0.2);
 }
 
@@ -30,7 +29,6 @@
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url(../../../../assets/button-icon.svg);
 }
 
 .book-flights {
@@ -48,22 +46,16 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  align-items: center;
   letter-spacing: 0.1px;
-  color: #ffffff;
 }
 
 .basket {
   width: 24px;
   height: 24px;
-  background-image: url(../../../../assets/basket.svg);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .user-settings {
   display: flex;
-  column-gap: 41px;
 }
 
 .user-settings:hover,
@@ -88,10 +80,6 @@
 
   .mat-mdc-form-field-infix {
     min-height: 38px;
-  }
-
-  .mat-mdc-select-arrow {
-    color: #ffffff;
   }
 
   .mat-mdc-option .mat-pseudo-checkbox-minimal {
@@ -127,7 +115,6 @@
     }
 
     .mat-mdc-select-value {
-      color: #ffffff;
       font-size: 16px;
       line-height: 16px;
       letter-spacing: 0.5px;
@@ -146,7 +133,6 @@
     }
 
     .mat-mdc-select-value {
-      color: #ffffff;
       font-size: 16px;
       line-height: 20px;
       letter-spacing: 0.1px;
@@ -154,6 +140,70 @@
 
     .mdc-text-field {
       padding: 0 14px;
+    }
+  }
+}
+
+.block-light {
+  .button-icon {
+    background-image: url(../../../../assets/user-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .basket {
+    background-image: url(../../../../assets/basket.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .button-text {
+    color: #ffffff;
+  }
+
+  .user-settings {
+    column-gap: 41px;
+  }
+
+  ::ng-deep {
+    .mat-mdc-select-arrow {
+      color: #ffffff;
+    }
+
+    .mat-mdc-select-value {
+      color: #ffffff;
+    }
+  }
+}
+
+.block-dark {
+  .button-icon {
+    background-image: url(../../../../assets/user-dark-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .basket {
+    background-image: url(../../../../assets/basket-dark.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .button-text {
+    color: #49454f;
+  }
+
+  .user-settings {
+    column-gap: 17px;
+  }
+
+  ::ng-deep {
+    .mat-mdc-select-arrow {
+      color: #49454f;
+    }
+
+    .mat-mdc-select-value {
+      color: #49454f;
     }
   }
 }

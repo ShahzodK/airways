@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  userName = 'Sign in';
+
   defaultDateFormat = 'MDY';
 
   defaultCurrency = 'EUR';
+
+  startBooking = false;
 }

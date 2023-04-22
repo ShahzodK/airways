@@ -1,0 +1,34 @@
+<header class="wrapper-header">
+  <div class="airways-icon"></div>
+
+  <div *ngIf="true; else elseBlock" class="book-flights">Book flights</div>
+  <ng-template #elseBlock>it is not for you </ng-template>
+
+  <div>
+    <div class="user-settings">
+      <mat-form-field appearance="fill" class="form-dateFormat">
+        <mat-select [(value)]="defaultDateFormat">
+          <mat-option value="MDY">MM/DD/YYYY</mat-option>
+          <mat-option value="DMY">DD/MM/YYYY</mat-option>
+          <mat-option value="YDM">YYYY/DD/MM</mat-option>
+          <mat-option value="YMD">YYYY/MM/DD</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-currency">
+        <mat-select [(value)]="defaultCurrency">
+          <mat-option value="EUR">EUR</mat-option>
+          <mat-option value="USA">USA</mat-option>
+          <mat-option value="RUB">RUB</mat-option>
+          <mat-option value="PLN">PLN</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button>
+        <div class="button-icon"></div>
+        <p class="button-text">Sign in</p>
+      </button>
+    </div>
+    <div class="basket"></div>
+  </div>
+</header>

@@ -1,0 +1,159 @@
+:host {
+  display: block;
+  background-color: rgba(116, 118, 122, 0.2);
+}
+
+.wrapper-header {
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 10.83vw 24px 12.36vw;
+  margin: 0 auto;
+
+  & div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+}
+
+.airways-icon {
+  width: 114px;
+  height: 40px;
+  background-image: url(../../../../assets/airways-icon.svg);
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.button-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../../assets/button-icon.svg);
+}
+
+.book-flights {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  margin-right: 56px;
+  margin-left: auto;
+}
+
+.button-text {
+  margin: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  align-items: center;
+  letter-spacing: 0.1px;
+  color: #ffffff;
+}
+
+.basket {
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../../assets/basket.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.user-settings {
+  display: flex;
+  column-gap: 41px;
+}
+
+.user-settings:hover,
+.basket:hover {
+  cursor: pointer;
+}
+
+::ng-deep {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent;
+    border: 1px solid #cecece;
+    border-radius: 4px;
+  }
+
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+      .mdc-text-field--textarea
+    )
+    .mat-mdc-form-field-infix {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .mat-mdc-form-field-infix {
+    min-height: 38px;
+  }
+
+  .mat-mdc-select-arrow {
+    color: #ffffff;
+  }
+
+  .mat-mdc-option .mat-pseudo-checkbox-minimal {
+    display: none;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  .mat-mdc-unelevated-button.mat-mdc-button-base {
+    height: 40px;
+    border: 1px solid #cecece;
+    border-radius: 4px;
+  }
+
+  .mat-mdc-unelevated-button.mat-unthemed {
+    --mdc-filled-button-container-color: transparent;
+  }
+
+  .mdc-button .mdc-button__label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.form-dateFormat {
+  ::ng-deep {
+    .mat-mdc-form-field-infix {
+      width: 128px;
+    }
+
+    .mat-mdc-select-value {
+      color: #ffffff;
+      font-size: 16px;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.form-currency {
+  ::ng-deep {
+    .mat-mdc-form-field-infix {
+      width: 32px;
+    }
+
+    .mat-mdc-select-arrow-wrapper {
+      display: none;
+    }
+
+    .mat-mdc-select-value {
+      color: #ffffff;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+    }
+
+    .mdc-text-field {
+      padding: 0 14px;
+    }
+  }
+}

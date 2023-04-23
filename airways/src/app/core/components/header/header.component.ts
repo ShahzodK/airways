@@ -12,5 +12,5 @@ export class HeaderComponent {
 
   defaultCurrency = 'EUR';
 
-  startBooking = false;
+  startBooking = true;
 }

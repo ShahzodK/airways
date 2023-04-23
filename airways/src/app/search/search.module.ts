@@ -6,8 +6,6 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PassengerCounterComponent } from './components/passenger-counter/passenger-counter.component';
 import { TotalPassengersPipe } from './pipes/totalPassengers.pipe';
 
-
-
 @NgModule({
   declarations: [
     MainPageComponent,
@@ -23,4 +21,4 @@ import { TotalPassengersPipe } from './pipes/totalPassengers.pipe';
     MainPageComponent,
   ]
 })
-export class SearchModule { }
+export class SearchModule {}

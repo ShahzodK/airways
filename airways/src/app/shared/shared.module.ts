@@ -8,7 +8,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -16,13 +21,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   exports: [
     MatButtonModule,
     MatIconModule,
-    MatInputModule,
     MatDialogModule,
     MatMenuModule,
     MatTooltipModule,
     MatToolbarModule,
     MatSelectModule,
-    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
+  providers: [
+    MatDatepickerModule
+  ]
 })
 export class SharedModule {}

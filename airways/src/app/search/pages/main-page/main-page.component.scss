@@ -92,10 +92,13 @@
     }
   }
 }
-::ng-deep .mat-mdc-text-field-wrapper {
-  background: #F4F6F9 !important;
-  border: 0.5px solid rgba(116, 118, 122, 0.6);
-  border-radius: 4px !important;
+
+.search-form-trip-info {
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    background: #F4F6F9 !important;
+    border: 0.5px solid rgba(116, 118, 122, 0.6);
+    border-radius: 4px !important;
+  }
 }
 
 ::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{

@@ -16,6 +16,7 @@
   &-trip-type {
     &-block {
       display: flex;
+      margin-bottom: 20px;
       gap: 60px;
     }
     &-field {
@@ -88,6 +89,7 @@
     &-container {
       display: flex;
       justify-content: right;
+      margin-top: 32px;
       margin-right: 13px;
     }
   }

@@ -9,18 +9,18 @@
     <input
       type="email"
       matInput
-      formControlName="login"
+      formControlName="email"
       placeholder="Ex. pat@example.com"
     />
     <mat-error
       *ngIf="
-        createUserGroup.controls.login.hasError('email') &&
-        !createUserGroup.controls.login.hasError('required')
+        createUserGroup.controls.email.hasError('email') &&
+        !createUserGroup.controls.email.hasError('required')
       "
     >
       Please enter a valid email address
     </mat-error>
-    <mat-error *ngIf="createUserGroup.controls.login.hasError('required')">
+    <mat-error *ngIf="createUserGroup.controls.email.hasError('required')">
       Email is <strong>required</strong>
     </mat-error>
   </mat-form-field>
@@ -39,7 +39,7 @@
       [attr.aria-label]="'Hide password'"
       [attr.aria-pressed]="hidePassword"
     >
-      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility"` }}</mat-icon>
     </button>
     <mat-error
       *ngIf="

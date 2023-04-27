@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,7 +19,13 @@ import { UserCartPagesComponent } from './pages/user-cart-pages/user-cart-pages.
     LogInComponent,
     LoginSocialNetworkComponent,
   ],
-  imports: [CommonModule, SharedModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   exports: [AuthPagesComponent],
 })
 export class UserModule {}

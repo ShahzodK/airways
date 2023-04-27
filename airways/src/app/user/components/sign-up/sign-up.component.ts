@@ -32,7 +32,7 @@ export class SignUpComponent {
   constructor(private authService: AuthService) {}
 
   createUserGroup = new FormGroup({
-    login: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, passwordValidator]),
     firstName: new FormControl('', [
       Validators.required,
@@ -66,7 +66,8 @@ export class SignUpComponent {
   }
 
   submitUserForm() {
-    console.log(this.createUserGroup.value);
+    const user = this.createUserGroup.getRawValue();
+    this.authService.createUser(user);
     this.authService.isLoginPageVisible$.next(false);
   }
 }

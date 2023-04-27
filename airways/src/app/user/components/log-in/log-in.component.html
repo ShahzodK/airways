@@ -9,18 +9,18 @@
     <input
       type="email"
       matInput
-      formControlName="login"
+      formControlName="email"
       placeholder="Ex. pat@example.com"
     />
     <mat-error
       *ngIf="
-        authGroup.controls.login.hasError('email') &&
-        !authGroup.controls.login.hasError('required')
+        authGroup.controls.email.hasError('email') &&
+        !authGroup.controls.email.hasError('required')
       "
     >
       Please enter a valid email address
     </mat-error>
-    <mat-error *ngIf="authGroup.controls.login.hasError('required')">
+    <mat-error *ngIf="authGroup.controls.email.hasError('required')">
       Email is <strong>required</strong>
     </mat-error>
   </mat-form-field>
@@ -29,6 +29,7 @@
     <mat-label>Enter your password</mat-label>
     <input
       formControlName="password"
+      (input)="authService.isBadRequest = false"
       matInput
       [type]="hidePassword ? 'password' : 'text'"
     />
@@ -53,6 +54,10 @@
       Password is <strong>required</strong>
     </mat-error>
   </mat-form-field>
+  <mat-error *ngIf="authService.isBadRequest">
+    Invalid login or password
+  </mat-error>
+
   <p class="forgot-password">Forgot password?</p>
   <button mat-raised-button>Login in</button>
 </form>

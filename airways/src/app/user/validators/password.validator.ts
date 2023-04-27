@@ -12,7 +12,7 @@ export function passwordValidator(
   const uppercaseLetters = /[A-Z]/;
   const lowercaseLetters = /[a-z]/;
   const number = /\d/;
-  const specialCharacter = /[!@#?*%&]/;
+  const specialCharacter = /[!@#?*%&$]/;
 
   if (value.length < 8) {
     isValidate = false;

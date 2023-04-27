@@ -1,24 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { AuthService } from 'app/user/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  isLoginPageVisible = false;
+export class HeaderComponent implements OnInit, OnDestroy {
+  userName!: string;
 
-  userName = 'Sign in';
-
-  defaultDateFormat = 'MDY';
-
-  defaultCurrency = 'EUR';
+  subscriptionOnUserName!: Subscription;
 
   startBooking = true;
 
+  constructor(public authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.checkLogIn();
+
+    this.subscriptionOnUserName = this.authService.userName.subscribe(
+      (name) => (this.userName = name)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionOnUserName.unsubscribe();
+  }
+
   openUserSettings() {
-    if (!localStorage.getItem('userAirwaysToken')) {
-      this.isLoginPageVisible = true;
+    if (!this.authService.isUserLoggedIn()) {
+      this.authService.isLoginPageVisible$.next(true);
     }
   }
 }

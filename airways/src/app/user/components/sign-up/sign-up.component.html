@@ -44,7 +44,7 @@
     <mat-error
       *ngIf="
         createUserGroup.controls.password.hasError('strong') &&
-        createUserGroup.controls.password.hasError('required')
+        !createUserGroup.controls.password.hasError('required')
       "
     >
       {{ isPasswordStrong() }}

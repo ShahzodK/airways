@@ -1,6 +1,9 @@
 <div class="background">
   <app-header></app-header>
   <app-main-page></app-main-page>
+  <app-auth-pages
+    *ngIf="authService.isLoginPageVisible | async"
+  ></app-auth-pages>
   <!-- <router-outlet></router-outlet> -->
 </div>
 

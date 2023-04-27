@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { AuthService } from 'app/user/services/auth.service';
+
 import { passwordValidator } from '../../validators/password.validator';
 
 @Component({
@@ -15,6 +17,8 @@ import { passwordValidator } from '../../validators/password.validator';
 })
 export class LogInComponent {
   hidePassword = true;
+
+  constructor(private authService: AuthService) {}
 
   authGroup = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.email]),
@@ -28,5 +32,6 @@ export class LogInComponent {
 
   submitAuthForm() {
     console.log(this.authGroup.value);
+    this.authService.isLoginPageVisible$.next(false);
   }
 }

@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { AuthService } from 'app/user/services/auth.service';
 import { dateValidator } from 'app/user/validators/date.validator';
 import { passwordValidator } from 'app/user/validators/password.validator';
 
@@ -28,6 +29,8 @@ export class SignUpComponent {
 
   hidePassword = true;
 
+  constructor(private authService: AuthService) {}
+
   createUserGroup = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, passwordValidator]),
@@ -48,7 +51,7 @@ export class SignUpComponent {
       Validators.minLength(10),
       Validators.maxLength(10),
     ]),
-    citizenship: new FormControl(''),
+    citizenship: new FormControl('unknown'),
     assent: new FormControl(false, Validators.requiredTrue),
   });
 
@@ -64,5 +67,6 @@ export class SignUpComponent {
 
   submitUserForm() {
     console.log(this.createUserGroup.value);
+    this.authService.isLoginPageVisible$.next(false);
   }
 }

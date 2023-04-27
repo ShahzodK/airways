@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as FlightsActions from '../../../redux/actions/flights.actions'
 import { MainService } from './../../services/main.service';
 
 @Component({
@@ -14,10 +16,14 @@ export class MainPageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.passengersInputEl  = this.passengersInput.nativeElement;
+    this.store.dispatch(FlightsActions.fetchFlights())
   }
 
 
-  constructor(public mainService: MainService) {}
+  constructor(
+    public mainService: MainService,
+    public store: Store
+  ) {}
 
   public searchForm = new FormGroup({
     tripType: new FormControl<string>(''),

@@ -10,7 +10,7 @@ import { TotalPassengersPipe } from './pipes/totalPassengers.pipe';
   declarations: [
     MainPageComponent,
     PassengerCounterComponent,
-    TotalPassengersPipe
+    TotalPassengersPipe,
   ],
   imports: [
     CommonModule,

@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  isLoginPageVisible = false;
+
   userName = 'Sign in';
 
   defaultDateFormat = 'MDY';
@@ -13,4 +15,10 @@ export class HeaderComponent {
   defaultCurrency = 'EUR';
 
   startBooking = true;
+
+  openUserSettings() {
+    if (!localStorage.getItem('userAirwaysToken')) {
+      this.isLoginPageVisible = true;
+    }
+  }
 }

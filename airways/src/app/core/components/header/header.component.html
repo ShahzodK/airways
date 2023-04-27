@@ -29,7 +29,7 @@
           </mat-select>
         </mat-form-field>
 
-        <button mat-flat-button>
+        <button mat-flat-button (click)="openUserSettings()">
           <div class="button-icon"></div>
           <p class="button-text">{{ userName }}</p>
         </button>
@@ -58,7 +58,7 @@
             </mat-select>
           </mat-form-field>
 
-          <button mat-flat-button>
+          <button mat-flat-button (click)="openUserSettings()">
             <div class="button-icon"></div>
             <p class="button-text">Sign in</p>
           </button>
@@ -68,3 +68,4 @@
     </ng-template>
   </header>
 </div>
+<app-auth-pages *ngIf="isLoginPageVisible"></app-auth-pages>

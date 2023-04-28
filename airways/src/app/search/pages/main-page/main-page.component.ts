@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as FlightsActions from '../../../redux/actions/flights.actions'
@@ -9,14 +9,17 @@ import { MainService } from './../../services/main.service';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent implements AfterViewInit {
+export class MainPageComponent implements AfterViewInit, OnInit {
   @ViewChild('passengersInput') passengersInput!: ElementRef;
 
   public passengersInputEl!: HTMLInputElement;
 
+  ngOnInit(): void {
+    this.store.dispatch(FlightsActions.fetchFlights());
+  }
+
   ngAfterViewInit(): void {
     this.passengersInputEl  = this.passengersInput.nativeElement;
-    this.store.dispatch(FlightsActions.fetchFlights())
   }
 
 

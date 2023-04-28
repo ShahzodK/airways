@@ -8,6 +8,14 @@ export interface UserResponse {
   user: {
     id: number;
     email: string;
+    firstName: string;
+    lastName: string;
+    dateOfBirth: string;
+    gender: string;
+    country: string;
+    phone: string;
+    citizenship: string;
+    assent: boolean;
   };
 }
 

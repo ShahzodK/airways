@@ -62,9 +62,9 @@ export class AuthService {
       .subscribe((newUser) => {
         if (newUser) {
           localStorage.setItem('userAirwaysToken', newUser.accessToken);
-          localStorage.setItem('userAirwaysName', newUser.user.email);
+          localStorage.setItem('userAirwaysName', newUser.user.firstName);
           this.userId = newUser.user.id.toString();
-          this.userName$.next(newUser.user.email);
+          this.userName$.next(newUser.user.firstName);
           this.isLoginPageVisible$.next(false);
           this.isBadRequest = false;
         } else {
@@ -77,9 +77,9 @@ export class AuthService {
     const url = 'http://localhost:3000/register';
     this.http.post<UserResponse>(url, user).subscribe((newUser) => {
       localStorage.setItem('userAirwaysToken', newUser.accessToken);
-      localStorage.setItem('userAirwaysName', newUser.user.email);
+      localStorage.setItem('userAirwaysName', newUser.user.firstName);
       this.userId = newUser.user.id.toString();
-      this.userName$.next(newUser.user.email);
+      this.userName$.next(newUser.user.firstName);
     });
   }
 }

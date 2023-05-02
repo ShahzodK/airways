@@ -12,7 +12,7 @@
     <div *ngIf="startBooking; else blockDark" class="block-light">
       <div class="user-settings">
         <mat-form-field appearance="fill" class="form-dateFormat">
-          <mat-select [(value)]="defaultDateFormat">
+          <mat-select [(value)]="authService.defaultDateFormat">
             <mat-option value="MDY">MM/DD/YYYY</mat-option>
             <mat-option value="DMY">DD/MM/YYYY</mat-option>
             <mat-option value="YDM">YYYY/DD/MM</mat-option>
@@ -21,7 +21,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="form-currency">
-          <mat-select [(value)]="defaultCurrency">
+          <mat-select [(value)]="authService.defaultCurrency">
             <mat-option value="EUR">EUR</mat-option>
             <mat-option value="USA">USA</mat-option>
             <mat-option value="RUB">RUB</mat-option>
@@ -29,7 +29,7 @@
           </mat-select>
         </mat-form-field>
 
-        <button mat-flat-button>
+        <button mat-flat-button (click)="openUserSettings()">
           <div class="button-icon"></div>
           <p class="button-text">{{ userName }}</p>
         </button>
@@ -41,7 +41,7 @@
       <div class="block-dark">
         <div class="user-settings">
           <mat-form-field appearance="fill" class="form-dateFormat">
-            <mat-select [(value)]="defaultDateFormat">
+            <mat-select [(value)]="authService.defaultDateFormat">
               <mat-option value="MDY">MM/DD/YYYY</mat-option>
               <mat-option value="DMY">DD/MM/YYYY</mat-option>
               <mat-option value="YDM">YYYY/DD/MM</mat-option>
@@ -50,7 +50,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="form-currency">
-            <mat-select [(value)]="defaultCurrency">
+            <mat-select [(value)]="authService.defaultCurrency">
               <mat-option value="EUR">EUR</mat-option>
               <mat-option value="USA">USA</mat-option>
               <mat-option value="RUB">RUB</mat-option>
@@ -58,7 +58,7 @@
             </mat-select>
           </mat-form-field>
 
-          <button mat-flat-button>
+          <button mat-flat-button (click)="openUserSettings()">
             <div class="button-icon"></div>
             <p class="button-text">Sign in</p>
           </button>

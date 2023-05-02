@@ -1,0 +1,63 @@
+<app-login-social-network></app-login-social-network>
+<form
+  class="example-form"
+  [formGroup]="authGroup"
+  (ngSubmit)="authGroup.valid && submitAuthForm()"
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. pat@example.com"
+    />
+    <mat-error
+      *ngIf="
+        authGroup.controls.email.hasError('email') &&
+        !authGroup.controls.email.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="authGroup.controls.email.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input
+      formControlName="password"
+      (input)="authService.isBadRequest = false"
+      matInput
+      [type]="hidePassword ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hidePassword = !hidePassword"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hidePassword"
+    >
+      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <mat-error
+      *ngIf="
+        authGroup.controls.password.hasError('strong') &&
+        !authGroup.controls.password.hasError('required')
+      "
+    >
+      {{ isPasswordStrong() }}
+    </mat-error>
+    <mat-error *ngIf="authGroup.controls.password.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-error *ngIf="authService.isBadRequest">
+    Invalid login or password
+  </mat-error>
+
+  <p class="forgot-password">Forgot password?</p>
+  <button mat-raised-button>Login in</button>
+</form>

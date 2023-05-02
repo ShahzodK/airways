@@ -1,0 +1,159 @@
+<app-login-social-network></app-login-social-network>
+<form
+  class="example-form"
+  [formGroup]="createUserGroup"
+  (ngSubmit)="createUserGroup.valid && submitUserForm()"
+>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      formControlName="email"
+      placeholder="Ex. pat@example.com"
+    />
+    <mat-error
+      *ngIf="
+        createUserGroup.controls.email.hasError('email') &&
+        !createUserGroup.controls.email.hasError('required')
+      "
+    >
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="createUserGroup.controls.email.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Enter your password</mat-label>
+    <input
+      formControlName="password"
+      matInput
+      [type]="hidePassword ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hidePassword = !hidePassword"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hidePassword"
+    >
+      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <mat-error
+      *ngIf="
+        createUserGroup.controls.password.hasError('strong') &&
+        !createUserGroup.controls.password.hasError('required')
+      "
+    >
+      {{ isPasswordStrong() }}
+    </mat-error>
+    <mat-error *ngIf="createUserGroup.controls.password.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>First name</mat-label>
+    <input type="text" matInput formControlName="firstName" />
+    <mat-error
+      *ngIf="
+        createUserGroup.controls.firstName.hasError('pattern') &&
+        !createUserGroup.controls.firstName.hasError('required')
+      "
+    >
+      Invalid character
+    </mat-error>
+    <mat-error *ngIf="createUserGroup.controls.firstName.hasError('required')">
+      First name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Last name</mat-label>
+    <input type="text" matInput formControlName="lastName" />
+    <mat-error
+      *ngIf="
+        createUserGroup.controls.lastName.hasError('pattern') &&
+        !createUserGroup.controls.lastName.hasError('required')
+      "
+    >
+      Invalid character
+    </mat-error>
+    <mat-error *ngIf="createUserGroup.controls.lastName.hasError('required')">
+      Last name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Date of birth</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error
+      *ngIf="createUserGroup.controls.dateOfBirth.hasError('afterDate')"
+    >
+      {{ isDateValid() }}
+    </mat-error>
+    <mat-error
+      *ngIf="createUserGroup.controls.dateOfBirth.hasError('required')"
+    >
+      Date is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="form-field-gender">
+    <mat-button-toggle-group matFormField formControlName="gender">
+      <mat-button-toggle value="male">Male</mat-button-toggle>
+      <mat-button-toggle value="female">Female</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="block-phone-field">
+    <mat-form-field appearance="fill" class="phone-form-field">
+      <mat-label>Select Country</mat-label>
+      <mat-select formControlName="country">
+        <mat-option *ngFor="let country of countries" [value]="country.code"
+          >{{ country.name }} ({{ country.code }})</mat-option
+        >
+      </mat-select>
+      <mat-error *ngIf="createUserGroup.controls.country.hasError('required')"
+        >Select a country</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="phone-form-field">
+      <mat-label>Mobile phone number</mat-label>
+      <input
+        matInput
+        #input
+        maxlength="10"
+        placeholder="e.g. 1111111111"
+        formControlName="phone"
+      />
+      <mat-error *ngIf="createUserGroup.controls.phone.hasError('required')"
+        >Phone number is <strong>required</strong></mat-error
+      >
+      <mat-hint align="end">{{ input.value.length }}/10</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Citizenship</mat-label>
+    <mat-select formControlName="citizenship">
+      <mat-option *ngFor="let country of countries" [value]="country.name">{{
+        country.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="field-assent">
+    <mat-checkbox ngDefaultControl formControlName="assent" color="primary"
+      >I agree to Airway's <a>Privacy Policy</a> and
+      <a>Terms of Use</a></mat-checkbox
+    >
+  </div>
+
+  <button mat-raised-button>Sign up</button>
+</form>

@@ -11,5 +11,6 @@ import { StepperComponent } from './components/stepper/stepper.component';
   declarations: [FooterComponent, HeaderComponent, StepperComponent],
   imports: [CommonModule, SharedModule],
   exports: [FooterComponent, HeaderComponent],
+  providers: [],
 })
 export class CoreModule {}

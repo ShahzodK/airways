@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,10 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
-    HttpClientModule
+    MatSlideToggleModule,
+    HttpClientModule,
   ],
   providers: [MatDatepickerModule],
 })

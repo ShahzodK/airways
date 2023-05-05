@@ -31,7 +31,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   openUserSettings() {
     if (!this.authService.isUserLoggedIn()) {
-      this.authService.isLoginPageVisible$.next(true);
+      if (this.authService.isLoginPageVisible$.getValue()) {
+        this.authService.isLoginPageVisible$.next(false);
+        this.authService.isChangeHeightMain = false;
+      } else {
+        this.authService.isLoginPageVisible$.next(true);
+      }
+      // console.log(this.authService.isLoginPageVisible$.getValue());
+      // this.authService.isLoginPageVisible$.next(true);
     }
   }
 }

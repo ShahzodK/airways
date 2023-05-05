@@ -1,5 +1,13 @@
 import { Component, DoCheck } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
+
+import { dateValidator } from 'app/user/validators/date.validator';
 
 @Component({
   selector: 'app-booking-page',
@@ -57,7 +65,7 @@ export class BookingPageComponent implements DoCheck {
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
       gender: ['', [Validators.required]],
-      date: '',
+      date: ['', [Validators.required, dateValidator]],
       specialAssistance: false,
     });
     this.passengers.push(passenger);
@@ -87,6 +95,10 @@ export class BookingPageComponent implements DoCheck {
     return this.passengers.controls[count].get(name)?.hasError('required');
   }
 
+  visibilityDateError(count: number) {
+    return this.passengers.controls[count].get('date')?.hasError('afterDate');
+  }
+
   visibilityPatternError(count: number, name: string) {
     return (
       this.passengers.controls[count].get(name)?.hasError('pattern') &&
@@ -95,14 +107,14 @@ export class BookingPageComponent implements DoCheck {
   }
 
   submit() {
-    //console.log(this.visibilityInvalidIcon(0, 'firstName'));
-    // console.log(this.passengers.controls[0].get('firstName'));
-    //console.log(this.passengers.controls[0].get('gender')?.touched);
-    // console.log(this.passengers.controls[0].touched);
     console.log(this.passengersForm.value);
   }
 
-  add() {
-    this.array.push('Adult');
+  isDateValid(count: number): ValidationErrors | null {
+    const error = this.passengers.controls[count].get('date')?.errors;
+    if (error) {
+      return error['afterDate'];
+    }
+    return null;
   }
 }

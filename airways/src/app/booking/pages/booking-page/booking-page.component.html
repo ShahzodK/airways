@@ -82,6 +82,12 @@
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="visibilityDateError(i)">
+            {{ isDateValid(i) }}
+          </mat-error>
+          <mat-error *ngIf="visibilityRequiredError(i, 'date')">
+            Date is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -166,6 +172,5 @@
   <div class="block-navigation">
     <button class="button-back">Back</button>
     <button class="button-continue">Continue</button>
-    <button class="button-continue" (click)="add()">add</button>
   </div>
 </form>

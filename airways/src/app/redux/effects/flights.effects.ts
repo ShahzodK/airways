@@ -16,12 +16,12 @@ export class FlightsEffects {
     public fetchFlights$ = createEffect(() => {
       return this.actions$
         .pipe(
-          ofType(FlightsActions.fetchFlights),
-          switchMap(() => this.mainService.getFlights()),
-          map((flights) => {
-              return FlightsActions.fetchFlightsSuccess({ flights })
+          ofType(FlightsActions.fetchFlightsName),
+          switchMap(() => this.mainService.getFlightsName()),
+          map((flights_name) => {
+              return FlightsActions.fetchFlightsNameSuccess({ flights_name })
           }),
-          catchError(() => of(FlightsActions.fetchFlightsFailed))
+          catchError(() => of(FlightsActions.fetchFlightsNameFailed))
         )
     })
 }

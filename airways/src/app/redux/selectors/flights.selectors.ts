@@ -3,7 +3,7 @@ import { IFlightsState } from '../flightState.model';
 
 export const selectFlightsState = createFeatureSelector<IFlightsState>('app');
 
-export const selectFlights = createSelector(
+export const selectFlightsName = createSelector(
   selectFlightsState,
-  (state) => state.flights
+  (state) => state.flights_name
 )

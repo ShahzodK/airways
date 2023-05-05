@@ -1,15 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { IFlights } from '../../shared/models/flights.model';
 
-export const fetchFlights = createAction (
-  '[FLIGHTS] Fetch Flights'
+export const fetchFlightsName = createAction (
+  '[FLIGHTS] Fetch Flights Name'
 );
 
-export const fetchFlightsSuccess = createAction (
-  '[FLIGHTS] Fetch Flights Success',
-  props<{ flights: IFlights[] }>(),
+export const fetchFlightsNameSuccess = createAction (
+  '[FLIGHTS] Fetch Flights Name Success',
+  props<{ flights_name: string[] }>(),
 )
 
-export const fetchFlightsFailed = createAction (
-  '[FLIGHTS] Fetch Flights Failed',
+export const fetchFlightsNameFailed = createAction (
+  '[FLIGHTS] Fetch Flights Name Failed',
 )

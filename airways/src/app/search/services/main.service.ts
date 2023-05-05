@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IFlights } from 'app/shared/models/flights.model';
 import { api } from 'app/shared/consts/constants';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class MainService {
 
   public infantCount = 0;
 
-  public getFlights(): Observable<IFlights[]> {
-    return this.http.get<IFlights[]>(`${api}/flights`);
+  public getFlightsName(): Observable<string[]> {
+    return this.http.get<string[]>(`${api}/flights_name`);
   }
 }

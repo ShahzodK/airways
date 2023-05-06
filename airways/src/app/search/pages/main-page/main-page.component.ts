@@ -7,6 +7,7 @@ import * as FlightsActions from '../../../redux/actions/flights.actions'
 import { MainService } from './../../services/main.service';
 import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
+import { sendSearchForm } from './../../redux/actions/search.actions';
 
 @Component({
   selector: 'app-main-page',
@@ -86,8 +87,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
   public submitForm () {
     if(this.searchForm.valid) {
       const formValue: ISearchForm = this.searchForm.getRawValue()
-      console.log(formValue);
-      this.mainService.searchFlight(formValue).subscribe((x) => console.log(x))
+      this.store.dispatch(sendSearchForm({flight: formValue}));
     }
   }
 

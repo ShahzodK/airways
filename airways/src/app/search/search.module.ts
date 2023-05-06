@@ -5,6 +5,10 @@ import { SharedModule } from 'app/shared/shared.module';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { PassengerCounterComponent } from './components/passenger-counter/passenger-counter.component';
 import { TotalPassengersPipe } from './pipes/totalPassengers.pipe';
+import { searchReducer } from './redux/reducers/search.reducers';
+import { SearchEffects } from './redux/effects/search.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -16,6 +20,8 @@ import { TotalPassengersPipe } from './pipes/totalPassengers.pipe';
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    StoreModule.forFeature( 'flight', searchReducer ),
+    EffectsModule.forFeature([SearchEffects]),
   ],
   exports: [
     MainPageComponent,

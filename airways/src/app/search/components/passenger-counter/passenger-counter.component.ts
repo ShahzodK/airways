@@ -20,9 +20,12 @@ export class PassengerCounterComponent {
         this.mainService.adultCount++;
         break;
       case 'Child':
+        this.mainService.adultCount == 0 ? this.mainService.adultCount++ : this.mainService.adultCount;
         this.mainService.childCount++;
         break;
       case 'Infant':
+        if(!this.mainService.adultCount) this.mainService.adultCount++;
+        this.mainService.adultCount == 0 ? this.mainService.adultCount++ : this.mainService.adultCount;
         this.mainService.infantCount++;
         break;
 
@@ -35,6 +38,10 @@ export class PassengerCounterComponent {
     switch (this.passengerType) {
       case 'Adults':
         this.mainService.adultCount > 0 ? this.mainService.adultCount-- : 0;
+        if(this.mainService.adultCount == 0) {
+          this.mainService.childCount = 0;
+          this.mainService.infantCount = 0;
+        }
         break;
       case 'Child':
         this.mainService.childCount > 0 ? this.mainService.childCount-- : 0;

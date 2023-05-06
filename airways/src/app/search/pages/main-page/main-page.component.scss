@@ -75,6 +75,10 @@
       color: black;
       border-color: black;
       width: 311px;
+      height: 81px;
+      &-range {
+        display: flex;
+      }
     }
     &-info {
       display: flex;
@@ -107,6 +111,27 @@
       margin-right: 13px;
     }
   }
+}
+
+.search-form-trip-info {
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    background: #F4F6F9 !important;
+    border: 0.5px solid rgba(116, 118, 122, 0.6);
+    border-radius: 4px !important;
+  }
+}
+
+::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color: black !important;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  display: flex;
+  padding-top: 5px !important;
+}
+
+::ng-deep .mat-date-range-input-container {
+  width: 200px;
 }
 
 .arrow {

@@ -1,25 +1,54 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import * as FlightsActions from '../../../redux/actions/flights.actions'
 import { MainService } from './../../services/main.service';
+import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
+import { ISearchForm } from 'app/search/models/searchForm.model';
+import { sendSearchForm } from './../../redux/actions/search.actions';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent implements AfterViewInit, OnInit {
+export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('passengersInput') passengersInput!: ElementRef;
 
   public passengersInputEl!: HTMLInputElement;
 
+  public isRoundTrip = true;
+
+  public flightsName = this.store.select(selectFlightsName);
+
+  public departures: string[] = [];
+
+  public destinations: string[] = [];
+
+  public flightsNameSub!: Subscription;
+
   ngOnInit(): void {
-    this.store.dispatch(FlightsActions.fetchFlights());
+    this.store.dispatch(FlightsActions.fetchFlightsName());
+    this.flightsNameSub = this.flightsName.pipe(
+      map((flightsName) => {
+        return flightsName.map((flightName) => {
+          const [departure, destination]: string[] = flightName.split('-');
+          this.departures.push(departure);
+          this.destinations.push(destination);
+          return [departure, destination];
+        })
+      })
+    ).subscribe()
   }
 
   ngAfterViewInit(): void {
     this.passengersInputEl  = this.passengersInput.nativeElement;
+  }
+
+  ngOnDestroy(): void {
+    this.flightsNameSub.unsubscribe();
   }
 
 
@@ -29,12 +58,12 @@ export class MainPageComponent implements AfterViewInit, OnInit {
   ) {}
 
   public searchForm = new FormGroup({
-    tripType: new FormControl<string>(''),
-    departure: new FormControl<string>(''),
-    destination: new FormControl<string>(''),
-    start: new FormControl<Date | null>(null),
+    tripType: new FormControl<string>('1', {nonNullable: true, validators: Validators.required}),
+    departure: new FormControl<string>('', {nonNullable: true, validators: Validators.required}),
+    destination: new FormControl<string>('', {nonNullable: true, validators: Validators.required}),
+    start: new FormControl<Date | null>(null, {nonNullable: true, validators: Validators.required}),
     end: new FormControl<Date | null>(null),
-    passengers: new FormControl<string>('')
+    passengers: new FormControl<string>('', {nonNullable: true, validators: Validators.required})
   });
 
   public truncateText(str: string, maxLength: number) {
@@ -45,8 +74,21 @@ export class MainPageComponent implements AfterViewInit, OnInit {
     }
   }
 
+  public changeTripType (type: string) {
+    switch (type) {
+      case 'one':
+        this.isRoundTrip = false;
+        break;
+      case 'round':
+        this.isRoundTrip = true;
+    }
+  }
+
   public submitForm () {
-    console.log(this.searchForm.value)
+    if(this.searchForm.valid) {
+      const formValue: ISearchForm = this.searchForm.getRawValue()
+      this.store.dispatch(sendSearchForm({flight: formValue}));
+    }
   }
 
   public updatePassengers() {

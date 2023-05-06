@@ -75,7 +75,7 @@
       color: black;
       border-color: black;
       width: 311px;
-      height: 58px;
+      height: 81px;
       &-range {
         display: flex;
       }
@@ -127,6 +127,7 @@
 
 ::ng-deep .mat-mdc-form-field-infix {
   display: flex;
+  padding-top: 5px !important;
 }
 
 ::ng-deep .mat-date-range-input-container {

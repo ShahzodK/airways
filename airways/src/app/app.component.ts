@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from './user/services/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'airways';
+  constructor(public authService: AuthService) {}
 }

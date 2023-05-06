@@ -1,0 +1,104 @@
+:host {
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  .example-container mat-form-field + mat-form-field {
+    margin-left: 8px;
+  }
+
+  .example-right-align {
+    text-align: right;
+  }
+
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    width: 100%;
+    background-color: #11397e;
+    height: 44px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+  }
+}
+
+.phone-form-field {
+  ::ng-deep {
+    .mat-mdc-text-field-wrapper {
+      width: 219px;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-mdc-tab-body-content {
+    overflow: hidden !important;
+  }
+}
+
+.block-phone-field {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-field-gender {
+  padding-bottom: 20px;
+  .mat-button-toggle-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  ::ng-deep {
+    .mat-button-toggle-button {
+      box-sizing: border-box;
+      width: 223px;
+      border: 1px solid #74767a;
+    }
+
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      line-height: 40px;
+    }
+  }
+}
+
+.field-assent {
+  padding: 14px 0 38px 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #1c1b1f;
+
+  ::ng-deep {
+    label {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+      color: #1c1b1f;
+    }
+  }
+
+  a {
+    color: #11397e;
+    text-decoration: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -6,21 +6,28 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
+import { selectSearchForm } from 'app/search/redux/selectors/search.selectors';
 import { dateValidator } from 'app/user/validators/date.validator';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-booking-page',
   templateUrl: './booking-page.component.html',
   styleUrls: ['./booking-page.component.scss'],
 })
-export class BookingPageComponent implements DoCheck {
+export class BookingPageComponent implements OnInit, DoCheck, OnDestroy {
   passengersForm: FormGroup;
+
+  passengers$!: Subscription;
+
+  passengersArray: string[] = [];
 
   titleInfo =
     "Add the passenger's name as it is written on their documents (passport or ID).Do not use any accents or special characters. Do not use a nickname.";
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store) {
     this.passengersForm = this.fb.group({
       passengers: this.fb.array([]),
       contacts: this.fb.group({
@@ -39,11 +46,19 @@ export class BookingPageComponent implements DoCheck {
     });
   }
 
-  ngDoCheck(): void {
-    this.array.forEach(() => this.addPassengers());
+  ngOnInit(): void {
+    this.passengers$ = this.store
+      .select(selectSearchForm)
+      .subscribe((data) => this.parsePassengers(data.passengers));
   }
 
-  array = ['Adult', 'Child', 'Infant'];
+  ngDoCheck(): void {
+    this.passengersArray.forEach(() => this.addPassengers());
+  }
+
+  ngOnDestroy(): void {
+    this.passengers$.unsubscribe();
+  }
 
   countries = [
     { code: '+1', name: 'United States' },
@@ -116,5 +131,15 @@ export class BookingPageComponent implements DoCheck {
       return error['afterDate'];
     }
     return null;
+  }
+
+  parsePassengers(arr: string[]) {
+    arr.forEach((passenger) => {
+      const [count, type] = passenger.split(' ');
+      if (+count > 0) {
+        const elem = Array(+count).fill(type);
+        this.passengersArray.push(...elem);
+      }
+    });
   }
 }

@@ -9,11 +9,11 @@
 <form class="example-form" [formGroup]="passengersForm" (ngSubmit)="submit()">
   <div formArrayName="passengers" class="passengers-block">
     <div
-      *ngFor="let item of array; let i = index"
+      *ngFor="let item of passengersArray; let i = index"
       [formGroupName]="i"
       class="passengers-card"
     >
-      <p class="passengers-header">{{ i + 1 }}. {{ array[i] }}</p>
+      <p class="passengers-header">{{ i + 1 }}. {{ passengersArray[i] }}</p>
       <div class="passengers-data">
         <mat-form-field class="example-full-width">
           <mat-label>First name</mat-label>

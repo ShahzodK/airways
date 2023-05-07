@@ -63,7 +63,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
     destination: new FormControl<string>('', {nonNullable: true, validators: Validators.required}),
     start: new FormControl<Date | null>(null, {nonNullable: true, validators: Validators.required}),
     end: new FormControl<Date | null>(null),
-    passengers: new FormControl<string>('', {nonNullable: true, validators: Validators.required})
+    passengers: new FormControl<string[]>([], {nonNullable: true, validators: Validators.required})
   });
 
   public truncateText(str: string, maxLength: number) {
@@ -86,14 +86,16 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public submitForm () {
     if(this.searchForm.valid) {
-      const formValue: ISearchForm = this.searchForm.getRawValue()
+      const formValue: ISearchForm = this.searchForm.getRawValue();
+      console.log(formValue.passengers)
+      formValue.passengers = this.mainService.passengers;
       this.store.dispatch(sendSearchForm({flight: formValue}));
     }
   }
 
   public updatePassengers() {
     this.searchForm.patchValue({
-      passengers: this.passengersInputEl.value
+      passengers: this.passengersInputEl.value.split('  ')
     })
   }
 

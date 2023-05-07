@@ -4,5 +4,5 @@ export interface ISearchForm {
   destination: string,
   start: Date | null,
   end?: Date | null,
-  passengers: string
+  passengers: string[]
 }

@@ -18,6 +18,8 @@ export class MainService {
 
   public infantCount = 0;
 
+  public passengers: string[] = [];
+
   public getFlightsName(): Observable<string[]> {
     return this.http.get<string[]>(`${api}/flights_name`);
   }

@@ -24,7 +24,7 @@ export const initialState: ISearchState = {
     destination: '',
     start: new Date(),
     end: new Date(),
-    passengers: ''
+    passengers: []
   }
 }
 

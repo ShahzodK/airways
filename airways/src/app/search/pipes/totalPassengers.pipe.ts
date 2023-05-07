@@ -29,7 +29,7 @@ export class TotalPassengersPipe implements PipeTransform {
             break;
         }
       })
-      const passengersStr = this.mainService.passengers.join('')
+      const passengersStr = this.mainService.passengers.join('');
       return passengersStr.substring(0,passengersStr.length - 8)+'...';
     }
   }

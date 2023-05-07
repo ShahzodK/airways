@@ -87,8 +87,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
   public submitForm () {
     if(this.searchForm.valid) {
       const formValue: ISearchForm = this.searchForm.getRawValue();
-      console.log(formValue.passengers)
-      formValue.passengers = this.mainService.passengers;
+      formValue.passengers = this.mainService.passengers.map(item => item.trim());
       this.store.dispatch(sendSearchForm({flight: formValue}));
     }
   }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ColorSchemeService } from './core/services/color-scheme.service';
 import { AuthService } from './user/services/auth.service';
 
 @Component({
@@ -8,5 +9,8 @@ import { AuthService } from './user/services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    public colorScheme: ColorSchemeService
+  ) {}
 }

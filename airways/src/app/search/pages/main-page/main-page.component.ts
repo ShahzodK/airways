@@ -7,7 +7,7 @@ import * as FlightsActions from '../../../redux/actions/flights.actions'
 import { MainService } from './../../services/main.service';
 import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
-import { sendSearchForm } from './../../redux/actions/search.actions';
+import { sendSearchForm } from './../../../redux/actions/flights.actions';
 
 @Component({
   selector: 'app-main-page',

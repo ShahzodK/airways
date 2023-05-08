@@ -7,3 +7,13 @@ export const selectFlightsName = createSelector(
   selectFlightsState,
   (state) => state.flights_name
 )
+
+export const selectSearchFlight = createSelector(
+  selectFlightsState,
+  (state) => state.flight
+)
+
+export const selectSearchForm = createSelector(
+  selectFlightsState,
+  (state) => state.searchForm
+)

@@ -6,6 +6,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
@@ -31,6 +32,7 @@ export class BookingPageComponent implements OnInit, DoCheck, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private store: Store,
+    private router: Router,
     private colorScheme: ColorSchemeService
   ) {
     this.colorScheme.changeScheme();
@@ -49,6 +51,15 @@ export class BookingPageComponent implements OnInit, DoCheck, OnDestroy {
           ],
         ],
         email: ['', [Validators.required, Validators.email]],
+        cardNumber: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('[0-9]*'),
+            Validators.minLength(16),
+            Validators.maxLength(16),
+          ],
+        ],
       }),
     });
   }
@@ -89,6 +100,7 @@ export class BookingPageComponent implements OnInit, DoCheck, OnDestroy {
       gender: ['', [Validators.required]],
       date: ['', [Validators.required, dateValidator]],
       specialAssistance: false,
+      baggage: false,
     });
     this.passengers.push(passenger);
   }
@@ -129,6 +141,7 @@ export class BookingPageComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   submit() {
+    this.router.navigateByUrl('booking/summary');
     console.log(this.passengersForm.value);
   }
 

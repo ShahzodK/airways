@@ -176,8 +176,10 @@
   background-color: #ffffff;
   padding: 32px 44px;
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
+
 .block-navigation {
   width: 100%;
   display: flex;
@@ -212,4 +214,10 @@
   color: #ffffff;
   border: none;
   cursor: pointer;
+}
+
+.baggage {
+  padding: 15px 0;
+  font-weight: 500;
+  font-size: 20px;
 }

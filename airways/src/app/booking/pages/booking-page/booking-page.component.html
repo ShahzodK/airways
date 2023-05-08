@@ -91,7 +91,14 @@
         </mat-form-field>
       </div>
 
-      <div class="special-block" *ngIf="item !== 'Infant'">
+      <div class="baggage">
+        <mat-checkbox ngDefaultControl formControlName="baggage" color="primary"
+          >Add baggage (max. 25 kg), carry-on baggage is already
+          included</mat-checkbox
+        >
+      </div>
+
+      <div class="special-block" *ngIf="item !== 'Infants'">
         <div>
           <input
             type="checkbox"
@@ -140,7 +147,7 @@
         <mat-label>Mobile phone number</mat-label>
         <input
           matInput
-          #input
+          #inputPhone
           maxlength="10"
           placeholder="e.g. 1111111111"
           formControlName="phone"
@@ -148,7 +155,7 @@
         <mat-error *ngIf="contactsRequiredError('phone')"
           >Phone number is <strong>required</strong></mat-error
         >
-        <mat-hint align="end">{{ input.value.length }}/10</mat-hint>
+        <mat-hint align="end">{{ inputPhone.value.length }}/10</mat-hint>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" class="contacts-input-email">
@@ -166,11 +173,26 @@
           Email is <strong>required</strong>
         </mat-error>
       </mat-form-field>
+
+      <mat-form-field appearance="fill" class="card-number">
+        <mat-label>Card number for payment</mat-label>
+        <input
+          matInput
+          #inputCardNumber
+          maxlength="16"
+          placeholder="1111 1111 1111 1111"
+          formControlName="cardNumber"
+        />
+        <mat-error *ngIf="contactsRequiredError('cardNumber')"
+          >Phone number is <strong>required</strong></mat-error
+        >
+        <mat-hint align="end">{{ inputCardNumber.value.length }}/16</mat-hint>
+      </mat-form-field>
     </div>
   </div>
 
   <div class="block-navigation">
-    <button class="button-back">Back</button>
+    <button class="button-back" (click)="submit()">Back</button>
     <button class="button-continue">Continue</button>
   </div>
 </form>

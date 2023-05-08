@@ -5,7 +5,7 @@
   }"
 >
   <header class="wrapper-header">
-    <div class="airways-icon"></div>
+    <div class="airways-icon" (click)="redirectToSearch()"></div>
 
     <div *ngIf="isColorScheme; else stepperBlock" class="book-flights">
       Book flights

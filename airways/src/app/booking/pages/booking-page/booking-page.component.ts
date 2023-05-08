@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
+import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 import { selectSearchForm } from 'app/search/redux/selectors/search.selectors';
 import { dateValidator } from 'app/user/validators/date.validator';
 import { Subscription } from 'rxjs';
@@ -27,7 +28,13 @@ export class BookingPageComponent implements OnInit, DoCheck, OnDestroy {
   titleInfo =
     "Add the passenger's name as it is written on their documents (passport or ID).Do not use any accents or special characters. Do not use a nickname.";
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private colorScheme: ColorSchemeService
+  ) {
+    this.colorScheme.changeScheme();
+
     this.passengersForm = this.fb.group({
       passengers: this.fb.array([]),
       contacts: this.fb.group({

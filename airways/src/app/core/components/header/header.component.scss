@@ -1,6 +1,12 @@
 .background-opacity {
   background-color: rgba(116, 118, 122, 0.2);
+}
 
+.background-white {
+  background-color: white;
+}
+
+:host {
   ::ng-deep {
     .mdc-text-field--filled:not(.mdc-text-field--disabled) {
       background-color: transparent;

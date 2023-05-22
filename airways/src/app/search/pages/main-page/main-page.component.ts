@@ -1,13 +1,16 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
-import * as FlightsActions from '../../../redux/actions/flights.actions'
-import { MainService } from './../../services/main.service';
+
 import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
-import { sendSearchForm } from './../../../redux/actions/flights.actions';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import * as FlightsActions from '../../../redux/actions/flights.actions';
+import { MainService } from '../../services/main.service';
+import { sendSearchForm } from '../../../redux/actions/flights.actions';
 
 @Component({
   selector: 'app-main-page',
@@ -53,7 +56,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
     this.flightsNameSub.unsubscribe();
   }
 
-  constructor(public mainService: MainService, public store: Store) {}
+  constructor(public mainService: MainService, public store: Store, private router: Router) {}
 
   public searchForm = new FormGroup({
     tripType: new FormControl<string>('1', {
@@ -104,6 +107,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
         item.trim()
       );
       this.store.dispatch(sendSearchForm({ flight: formValue }));
+      this.router.navigateByUrl('booking');
     }
   }
 

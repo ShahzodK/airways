@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -54,7 +55,8 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
 
   constructor(
     public mainService: MainService,
-    public store: Store
+    public store: Store,
+    public router: Router
   ) {}
 
   public searchForm = new FormGroup({
@@ -89,6 +91,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
       const formValue: ISearchForm = this.searchForm.getRawValue();
       formValue.passengers = this.mainService.passengers.map(item => item.trim());
       this.store.dispatch(sendSearchForm({flight: formValue}));
+      this.router.navigate(['/booking-ticket']);
     }
   }
 

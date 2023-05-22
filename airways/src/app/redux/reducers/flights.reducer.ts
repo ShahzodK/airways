@@ -5,28 +5,78 @@ import { IFlightsState } from '../flightState.model';
 export const initialState: IFlightsState = {
   flights: [],
   flights_name: [],
-  flight: {
-    flight_name: '',
-    flight_no: '',
-    seats_amount: 0,
-    columns: 0,
+  flight: [{
+    flight_name: 'Dublin-Dubai',
+    flight_no: 'AR2345',
+    departure: 'Dublin',
+    destination: 'Dubai',
+    seats_amount: 123,
+    columns: 4,
     rows: [],
     dates: [{
-      date: new Date(),
+      date: new Date('10/08/2023'),
       prices: {
-        adult: '',
-        child: '',
-        infant: ''
-      }
-    }]
+        adult: '98$',
+        child: '101$',
+        infant: '102$'
+      },
+      departure_time: "13:00",
+      arrival_time: "18:00",
+      duration: "5h 00m"
+    },
+    {
+      date: new Date('10/07/2023'),
+      prices: {
+        adult: '90$',
+        child: '95$',
+        infant: '100$'
+      },
+      departure_time: "13:00",
+      arrival_time: "18:00",
+      duration: "5h 00m"
   },
+  {
+    date: new Date('10/06/2023'),
+    prices: {
+      adult: '92$',
+      child: '93$',
+      infant: '97$'
+    },
+    departure_time: "13:00",
+    arrival_time: "18:00",
+    duration: "5h 00m"
+  },
+  {
+    date: new Date('10/10/2023'),
+    prices: {
+      adult: '98$',
+      child: '101$',
+      infant: '102$'
+    },
+    departure_time: "13:00",
+    arrival_time: "18:00",
+    duration: "5h 00m"
+  },
+  {
+    date: new Date('11/10/2023'),
+    prices: {
+      adult: '98$',
+      child: '101$',
+      infant: '102$'
+    },
+    departure_time: "13:00",
+    arrival_time: "18:00",
+    duration: "5h 00m"
+  }
+]
+  }],
   searchForm: {
-    tripType: '',
-    departure: '',
-    destination: '',
-    start: new Date(),
+    tripType: '1',
+    departure: 'Dublin',
+    destination: 'Dubai',
+    start: new Date('10/05/2023'),
     end: new Date(),
-    passengers: []
+    passengers: ["1 adult", "1 children", "2 infant"]
   }
 }
 

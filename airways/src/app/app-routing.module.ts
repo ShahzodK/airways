@@ -10,6 +10,11 @@ const routes: Routes = [
     loadChildren: () => import('./search/search.module')
     .then((mod) => mod.SearchModule),
   },
+  {
+    path: 'booking-ticket',
+    loadChildren: () => import('./booking-ticket/booking-ticket.module')
+    .then((mod) => mod.BookingTicketModule),
+  },
 ];
 
 @NgModule({

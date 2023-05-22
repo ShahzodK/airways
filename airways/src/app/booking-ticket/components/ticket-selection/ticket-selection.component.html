@@ -1,0 +1,90 @@
+<div class="ticket-selection" *ngIf="(searchFlight$ | async) as searchFlight">
+  <div class="flight-info-ticket-title">
+    <img src="../../../../assets/plane.svg" alt="Plane">
+    <h3> {{searchFlight[0].departure}} to {{searchFlight[0].destination}}</h3>
+  </div>
+
+  <div class="flight-info flight-info-departure">
+    <mat-tab-group>
+      <mat-tab *ngFor="let departures of flightDates.departures; index as i" [disabled]="departures.price">
+        <ng-template mat-tab-label>
+          <div class="tab-label-content">
+            <p class="date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
+            <p class="weekday">{{departures.date.toLocaleDateString('en-US', {weekday: 'long'})}}</p>
+            <p class="price">{{departures.price}}</p>
+          </div>
+        </ng-template>
+        <div class="flight-info-ticket">
+          <div class="flight-info-ticket-departure-time">
+            <p class="flight-info-ticket-date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', weekday: 'long'})}}</p>
+            <p class="flight-info-ticket-time">{{departures.departure_time}}</p>
+            <p class="flight-info-ticket-from">{{searchFlight[0].departure}}</p>
+          </div>
+          <div class="flight-info-ticket-length">
+            <p class="flight-info-ticket-length-duration">{{departures.duration}}</p>
+            <img src="../../../../assets/airplane_takeoff.svg" alt="takeoff">
+            <span class="flight-info-ticket-line"></span>
+            <p class="flight-info-ticket-length-duration">Direct</p>
+          </div>
+          <div class="flight-info-ticket-arrival-time">
+            <p class="flight-info-ticket-date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', weekday: 'long'})}}</p>
+            <p class="flight-info-ticket-time">{{departures.arrival_time}}</p>
+            <p class="flight-info-ticket-from">{{searchFlight[0].destination}}</p>
+          </div>
+          <div class="flight-info-ticket-price-block">
+            <span class="divider"></span>
+            <p class="flight-info-ticket-seats">{{searchFlight[0].seats_amount}} seats<br> available</p>
+            <p class="flight-info-ticket-price-name">price</p>
+            <p class="flight-info-ticket-price">{{departures.price}}</p>
+          </div>
+          <button *ngIf="!isDepartureTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('departure')">Select</button>
+          <button *ngIf="isDepartureTicketSelected" class="flight-info-ticket-select-btn">Edit</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="flight-info-ticket-title">
+    <img src="../../../../assets/plane.svg" alt="Plane">
+    <h3> {{searchFlight[1].destination}} to {{searchFlight[1].departure}}</h3>
+  </div>
+  <div class="flight-info flight-info-destination">
+    <mat-tab-group>
+      <mat-tab *ngFor="let destinations of flightDates.destinations; index as i" [disabled]="destinations.disabled">
+        <ng-template mat-tab-label>
+          <div class="tab-label-content">
+            <p class="date">{{destinations.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
+            <p class="weekday">{{destinations.date.toLocaleDateString('en-US', {weekday: 'long'})}}</p>
+            <p class="price">{{destinations.price}}</p>
+          </div>
+        </ng-template>
+        <div class="flight-info-ticket" *ngIf="destinations.price !== ' '">
+          <div class="flight-info-ticket-destination-time">
+            <p class="flight-info-ticket-date">{{destinations.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', weekday: 'long'})}}</p>
+            <p class="flight-info-ticket-time">{{destinations.departure_time}}</p>
+            <p class="flight-info-ticket-from">{{searchFlight[1].departure}}</p>
+          </div>
+          <div class="flight-info-ticket-length">
+            <p class="flight-info-ticket-length-duration">{{destinations.duration}}</p>
+            <img src="../../../../assets/airplane_takeoff.svg" alt="takeoff">
+            <span class="flight-info-ticket-line"></span>
+            <p class="flight-info-ticket-length-duration">Direct</p>
+          </div>
+          <div class="flight-info-ticket-arrival-time">
+            <p class="flight-info-ticket-date">{{destinations.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', weekday: 'long'})}}</p>
+            <p class="flight-info-ticket-time">{{destinations.arrival_time}}</p>
+            <p class="flight-info-ticket-from">{{searchFlight[1].destination}}</p>
+          </div>
+          <div class="flight-info-ticket-price-block">
+            <span class="divider"></span>
+            <p class="flight-info-ticket-seats">{{searchFlight[1].seats_amount}} seats<br> available</p>
+            <p class="flight-info-ticket-price-name">price</p>
+            <p class="flight-info-ticket-price">{{destinations.price}}</p>
+          </div>
+          <button *ngIf="!isDestinationTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('destination')">Select</button>
+          <button *ngIf="isDestinationTicketSelected" class="flight-info-ticket-select-btn">Edit</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

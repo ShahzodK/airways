@@ -22,7 +22,7 @@ export const sendSearchForm = createAction (
 
 export const sendSearchFormSuccess = createAction (
   '[SEARCH] SEND Search Form Success',
-  props<{ flight: IFlights }>(),
+  props<{ flight: IFlights[] }>(),
 )
 
 export const sendSearchFormFailed = createAction (

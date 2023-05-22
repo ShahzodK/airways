@@ -14,10 +14,9 @@ import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import * as FlightsActions from '../../../redux/actions/flights.actions';
-import { sendSearchForm } from '../../redux/actions/search.actions';
 import { MainService } from '../../services/main.service';
+
 
 @Component({
   selector: 'app-main-page',

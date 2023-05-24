@@ -1,5 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -16,9 +22,7 @@ import { selectSearchForm } from '../../../redux/selectors/flights.selectors';
   templateUrl: './booking-page.component.html',
   styleUrls: ['./booking-page.component.scss'],
 })
-
 export class BookingPageComponent implements OnInit, OnDestroy {
-
   passengersForm: FormGroup;
 
   passengers$!: Subscription;
@@ -153,27 +157,19 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   }
 
   parsePassengers(arr: string[]) {
-    console.log(arr)
-// <<<<<<< HEAD
-//     const passengers: string[] = [];
-// =======
-// >>>>>>> 110bf52708fe13303d555bf396f3e5b0fb8d101d
-//     arr.forEach((passenger) => {
-//       const [count, type] = passenger.split(' ');
-//       if (+count > 0) {
-//         const elem = Array(+count).fill(type);
-// <<<<<<< HEAD
-//         passengers.push(...elem);
-//       }
-//     });
-//     passengers.forEach((elem) => {
-//       this.addPassengers();
-//       this.passengersArray.push(elem);
-//     });
-// =======
-//         this.passengersArray.push(...elem);
-//       }
-//     });
-// >>>>>>> 110bf52708fe13303d555bf396f3e5b0fb8d101d
-}
+    console.log(arr);
+
+    const passengers: string[] = [];
+    arr.forEach((passenger) => {
+      const [count, type] = passenger.split(' ');
+      if (+count > 0) {
+        const elem = Array(+count).fill(type);
+        passengers.push(...elem);
+      }
+    });
+    passengers.forEach((elem) => {
+      this.addPassengers();
+      this.passengersArray.push(elem);
+    });
+  }
 }

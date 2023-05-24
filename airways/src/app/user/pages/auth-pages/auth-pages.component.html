@@ -1,5 +1,5 @@
 <div class="pop-up-login">
-  <mat-tab-group>
+  <mat-tab-group (selectedTabChange)="check($event)">
     <mat-tab label="Login in">
       <app-log-in></app-log-in>
     </mat-tab>

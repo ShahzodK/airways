@@ -1,15 +1,20 @@
-<div [ngClass]="{ 'background-opacity': startBooking }">
+<div
+  [ngClass]="{
+    'background-opacity': isColorScheme,
+    'background-white': !isColorScheme
+  }"
+>
   <header class="wrapper-header">
-    <div class="airways-icon"></div>
+    <div class="airways-icon" (click)="redirectToSearch()"></div>
 
-    <div *ngIf="startBooking; else stepperBlock" class="book-flights">
+    <div *ngIf="isColorScheme; else stepperBlock" class="book-flights">
       Book flights
     </div>
     <ng-template #stepperBlock>
       <app-stepper></app-stepper>
     </ng-template>
 
-    <div *ngIf="startBooking; else blockDark" class="block-light">
+    <div *ngIf="isColorScheme; else blockDark" class="block-light">
       <div class="user-settings">
         <mat-form-field appearance="fill" class="form-dateFormat">
           <mat-select [(value)]="authService.defaultDateFormat">

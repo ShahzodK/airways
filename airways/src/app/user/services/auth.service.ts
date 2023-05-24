@@ -29,6 +29,8 @@ export class AuthService {
 
   userId!: string;
 
+  isChangeHeightMain = false;
+
   constructor(private http: HttpClient) {
     this.userName = this.userName$.asObservable();
     this.isLogged = this.isLogged$.asObservable();

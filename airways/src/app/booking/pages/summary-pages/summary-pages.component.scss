@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  padding: 40px 156px 48px 156px;
+}
+
+.block-preview {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  gap: 12px;
+}
+
+.preview-text {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #11397e;
+}
+
+.preview-img {
+  width: 24px;
+  height: 24px;
+  padding: 156px 40px 156px 48px;
+}

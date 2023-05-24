@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatest, map } from 'rxjs';
+import { ITicket } from 'app/booking-ticket/models/ticket.model';
 import { selectSearchFlight, selectSearchForm } from 'app/redux/selectors/flights.selectors';
 import { IDate } from 'app/shared/models/date.model';
-import { combineLatest, map } from 'rxjs';
+import { saveSelectedTickets } from 'app/redux/actions/flights.actions';
 
 @Component({
   selector: 'app-ticket-selection',
@@ -14,7 +16,8 @@ export class TicketSelectionComponent implements OnInit  {
   constructor(
               private store: Store,
               private elementRef: ElementRef,
-              private renderer: Renderer2) {}
+              private renderer: Renderer2
+              ) {}
 
   public searchFlight$ = this.store.select(selectSearchFlight);
 
@@ -29,14 +32,16 @@ export class TicketSelectionComponent implements OnInit  {
 
   public isDestinationTicketSelected = false;
 
+  public selectedDepartureTicket!: ITicket;
+  
+  public selectedDestinationTicket: ITicket | undefined;
+
   ngOnInit(): void {
-    combineLatest([this.searchFlight$, this.searchForm$])
+    combineLatest([this.searchFlight$, this.searchForm$ ])
     .pipe(
-      map(([searchFlight, searchForm]) => {
+      map(([searchFlight, searchForm ]) => {
         const startDate: IDate[] = JSON.parse(JSON.stringify(searchFlight[0].dates));
-        const endDate: IDate[] = JSON.parse(JSON.stringify(searchFlight[1].dates));
-        const startDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean}[] = this.addDates(searchForm.start!);
-        const endDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean}[] = this.addDates(searchForm.end!)
+        const startDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean, flight_no?: string, passengers?: string[]}[] = this.addDates(searchForm.start!);
         startDates.map((date) => {
           startDate.forEach((flightDates, i) => {
             if(date.date.getTime() == new Date(flightDates.date).getTime()) {
@@ -45,6 +50,8 @@ export class TicketSelectionComponent implements OnInit  {
               date.departure_time = flightDates.departure_time;
               date.arrival_time = flightDates.arrival_time;
               date.duration = flightDates.duration;
+              date.flight_no = searchFlight[0].flight_no
+              date.passengers = searchForm.passengers
             }
             else {
               date.price = date.price ? date.price : ' ';
@@ -52,57 +59,52 @@ export class TicketSelectionComponent implements OnInit  {
           });
           return date
         })
-        endDates.map((date) => {
-          endDate.forEach((flightDates, i) => {
-            if(date.date.getTime() == new Date(flightDates.date).getTime()) {
-              delete endDate[i];
-              date.price = flightDates.prices.adult;
-              date.departure_time = flightDates.departure_time;
-              date.arrival_time = flightDates.arrival_time;
-              date.duration = flightDates.duration;
-            }
-            else {
-              date.price = date.price ? date.price : ' ';
-            }
-          });
-          return date
-        })
-        return [startDates, endDates]
+        if(searchForm.tripType == '1') {
+          const endDate: IDate[] = JSON.parse(JSON.stringify(searchFlight[1].dates));
+          const endDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean, flight_no?: string, passengers?: string[]}[] = this.addDates(searchForm.end!)
+          endDates.map((date) => {
+            endDate.forEach((flightDates, i) => {
+              if(date.date.getTime() == new Date(flightDates.date).getTime()) {
+                delete endDate[i];
+                date.price = flightDates.prices.adult;
+                date.departure_time = flightDates.departure_time;
+                date.arrival_time = flightDates.arrival_time;
+                date.duration = flightDates.duration;
+                date.flight_no = searchFlight[1].flight_no
+                date.passengers = searchForm.passengers
+              }
+              else {
+                date.price = date.price ? date.price : ' ';
+              }
+            });
+            return date
+          })
+          return [startDates, endDates]
+        }
+        else {
+          return [startDates]
+        }
       })
     ).subscribe((dates) => {
-       this.flightDates.departures = dates[0];
-       this.flightDates.destinations = dates[1];
-       this.flightDates.departures.map((departure) => {
+      this.flightDates.departures = dates[0];
+      this.flightDates.departures.map((departure) => {
         if(departure.price == ' ') {
-          console.log(2);
            departure.disabled = true;
         }
         else departure.disabled = false;
        })
-       this.flightDates.destinations.map((destination) => {
-        if(destination.price == ' ') {
-          console.log(1);
-           destination.disabled = true;
-        }
-        else destination.disabled = false;
-       })
-      });
+      if(dates.length > 1) {
+        this.flightDates.destinations = dates[1];
+        this.flightDates.destinations.map((destination) => {
+         if(destination.price == ' ') {
+            destination.disabled = true;
+         }
+         else destination.disabled = false;
+        })
+      }
+    });
 
-    // combineLatest([this.searchFlight$, this.searchForm$])
-    // .pipe(
-    //   map(([searchFlight, searchForm]) => {
-    //     console.log(searchFlight)
-    //     return flight
-    //   })
-    // ).subscribe((flight, list) => {
-    //   console.log(list);
-    //   flight[0].dates.filter((date) => {
-    //     date == search
-    //   })
-    //   this.flightDates = flight[0].dates;
-    // })
   }
-  // new Date('2023-05-10T12:00:00Z')
 
   public addDates(date: Date) {
     const givenDate = date;
@@ -124,29 +126,55 @@ export class TicketSelectionComponent implements OnInit  {
     return [datesBefore.reverse(), datesLater].flat(1)
   }
 
-  public selectTicket(direction: string) {
-    let tabLabel
-    if(direction == 'departure') {
+  public selectTicket(direction: string, action: string, ticket?: any) {
+    let tabLabel;
+    if(action == 'edit' && direction == 'departure') {
+      this.selectedDepartureTicket = {
+        arrival_time: '',
+        date: new Date(),
+        departure_time: '',
+        disabled: true,
+        duration: '',
+        price: '',
+        flight_no: '',
+        passengers: []
+      }
+      tabLabel = this.elementRef.nativeElement.querySelectorAll('.mat-mdc-tab-header')[0];
+      this.isDepartureTicketSelected = false;
+      this.renderer.setStyle(tabLabel, 'display', 'flex');
+    }
+    else if(action == 'edit' && direction == 'destination') {
+      this.selectedDestinationTicket = {
+        arrival_time: '',
+        date: new Date(),
+        departure_time: '',
+        disabled: true,
+        duration: '',
+        price: '',
+        flight_no: '',
+        passengers: []
+      };
+      tabLabel = this.elementRef.nativeElement.querySelectorAll('.mat-mdc-tab-header')[1];
+      this.isDestinationTicketSelected = false;
+      this.renderer.setStyle(tabLabel, 'display', 'flex')
+    }
+    if(direction == 'departure' && action == 'select') {
+       this.selectedDepartureTicket = ticket;
        tabLabel = this.elementRef.nativeElement.querySelectorAll('mat-tab-header')[0];
        this.isDepartureTicketSelected = true;
+       this.renderer.setStyle(tabLabel, 'display', 'none')
     }
-    else if(direction == 'destination') {
+    else if(direction == 'destination' && action == 'select') {
+      this.selectedDestinationTicket = ticket;
        tabLabel = this.elementRef.nativeElement.querySelectorAll('mat-tab-header')[1];
        this.isDestinationTicketSelected = true;
+       this.renderer.setStyle(tabLabel, 'display', 'none')
     }
-    this.renderer.setStyle(tabLabel, 'display', 'none')
   }
 
-  public getPrice(destination: any) {
-      if(destination.price !== ' ' || destination.price !== '') {
-        console.log(destination);
-        console.log(1);
-         return false;
-      }
-      else {
-        console.log('2');
-        return true;
-      }
-    // console.log(destination)
+  public saveTickets() {
+    if(this.selectedDestinationTicket) this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket,  destinationTicket: this.selectedDestinationTicket}))
+    else this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket}))
+
   }
 }

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { ITicket } from 'app/booking-ticket/models/ticket.model';
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { IFlights } from 'app/shared/models/flights.model';
 
@@ -32,4 +33,9 @@ export const sendSearchFormFailed = createAction (
 export const saveSearchForm = createAction (
   '[SEARCH] SAVE Search Form',
   props<{ searchForm: ISearchForm }>(),
+)
+
+export const saveSelectedTickets = createAction (
+  '[BOOKING] SAVE Selected Tickets',
+  props<{ departureTicket: ITicket, destinationTicket?: ITicket }>(),
 )

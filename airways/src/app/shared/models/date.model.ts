@@ -1,4 +1,5 @@
 export interface IDate {
+    flight_no: string
     date: Date,
     prices: {
       adult: string,

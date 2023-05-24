@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectSearchForm, selectSearchFlight } from 'app/redux/selectors/flights.selectors';
+import { retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-booking-ticket-page',
@@ -16,6 +17,6 @@ export class BookingTicketPageComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.searchFlight$.subscribe(x => console.log(x))
+    // this.searchFlight$.pipe(retry(2)).subscribe(x => console.log(x))
   }
 }

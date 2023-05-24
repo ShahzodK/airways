@@ -6,7 +6,7 @@
 
   <div class="flight-info flight-info-departure">
     <mat-tab-group>
-      <mat-tab *ngFor="let departures of flightDates.departures; index as i" [disabled]="departures.price">
+      <mat-tab *ngFor="let departures of flightDates.departures; index as i">
         <ng-template mat-tab-label>
           <div class="tab-label-content">
             <p class="date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
@@ -14,7 +14,7 @@
             <p class="price">{{departures.price}}</p>
           </div>
         </ng-template>
-        <div class="flight-info-ticket">
+        <div class="flight-info-ticket" *ngIf="!!departures.price && departures.price != ' '">
           <div class="flight-info-ticket-departure-time">
             <p class="flight-info-ticket-date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', weekday: 'long'})}}</p>
             <p class="flight-info-ticket-time">{{departures.departure_time}}</p>
@@ -37,20 +37,20 @@
             <p class="flight-info-ticket-price-name">price</p>
             <p class="flight-info-ticket-price">{{departures.price}}</p>
           </div>
-          <button *ngIf="!isDepartureTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('departure')">Select</button>
-          <button *ngIf="isDepartureTicketSelected" class="flight-info-ticket-select-btn">Edit</button>
+            <button *ngIf="!isDepartureTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('departure', 'select', departures)">Select</button>
+            <button *ngIf="isDepartureTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('departure', 'edit')">Edit</button>
         </div>
       </mat-tab>
     </mat-tab-group>
   </div>
 
-  <div class="flight-info-ticket-title">
+  <div class="flight-info-ticket-title" *ngIf="searchFlight.length > 1">
     <img src="../../../../assets/plane.svg" alt="Plane">
     <h3> {{searchFlight[1].destination}} to {{searchFlight[1].departure}}</h3>
   </div>
   <div class="flight-info flight-info-destination">
     <mat-tab-group>
-      <mat-tab *ngFor="let destinations of flightDates.destinations; index as i" [disabled]="destinations.disabled">
+      <mat-tab *ngFor="let destinations of flightDates.destinations; index as i">
         <ng-template mat-tab-label>
           <div class="tab-label-content">
             <p class="date">{{destinations.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
@@ -58,7 +58,7 @@
             <p class="price">{{destinations.price}}</p>
           </div>
         </ng-template>
-        <div class="flight-info-ticket" *ngIf="destinations.price !== ' '">
+        <div class="flight-info-ticket" *ngIf="!!destinations.price && destinations.price != ' '">
           <div class="flight-info-ticket-destination-time">
             <p class="flight-info-ticket-date">{{destinations.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long', weekday: 'long'})}}</p>
             <p class="flight-info-ticket-time">{{destinations.departure_time}}</p>
@@ -81,10 +81,22 @@
             <p class="flight-info-ticket-price-name">price</p>
             <p class="flight-info-ticket-price">{{destinations.price}}</p>
           </div>
-          <button *ngIf="!isDestinationTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('destination')">Select</button>
-          <button *ngIf="isDestinationTicketSelected" class="flight-info-ticket-select-btn">Edit</button>
+          <button *ngIf="!isDestinationTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('destination', 'select', destinations)">Select</button>
+          <button *ngIf="isDestinationTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('destination', 'edit')">Edit</button>
         </div>
       </mat-tab>
     </mat-tab-group>
+  </div>
+  <div class="flight-info-continue">
+    <button class="flight-info-back flight-info-decision-btn" routerLink="../search">Back</button>
+    <button
+           class="flight-info-continue-btn flight-info-decision-btn"
+          (click)="saveTickets()"
+          [disabled]="(!isDestinationTicketSelected && !isDepartureTicketSelected && searchFlight.length > 1)
+          || (!isDestinationTicketSelected && !isDepartureTicketSelected && !(searchFlight.length > 1))"
+          [ngStyle]="{'background': (!isDestinationTicketSelected && isDepartureTicketSelected && !(searchFlight.length > 1))
+          || (isDestinationTicketSelected && isDepartureTicketSelected && (searchFlight.length > 1)) ? '#11397E' : 'gray'}">
+          Continue
+    </button>
   </div>
 </div>

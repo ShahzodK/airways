@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ITicket } from 'app/booking-ticket/models/ticket.model';
+import { ITicket } from 'app/booking/models/ticket.model';
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { IFlights } from 'app/shared/models/flights.model';
 

@@ -11,9 +11,9 @@ const routes: Routes = [
     .then((mod) => mod.SearchModule),
   },
   {
-    path: 'booking-ticket',
-    loadChildren: () => import('./booking-ticket/booking-ticket.module')
-    .then((mod) => mod.BookingTicketModule),
+    path: 'booking',
+    loadChildren: () => import('./booking/booking.module')
+    .then((mod) => mod.BookingModule),
   },
 ];
 

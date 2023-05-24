@@ -69,5 +69,6 @@ export class SignUpComponent {
     const user = this.createUserGroup.getRawValue();
     this.authService.createUser(user);
     this.authService.isLoginPageVisible$.next(false);
+    this.authService.isChangeHeightMain = false;
   }
 }

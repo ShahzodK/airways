@@ -1,0 +1,223 @@
+:host {
+  display: block;
+  padding: 40px 157px 102px 155px;
+
+  ::ng-deep {
+    .mat-mdc-form-field-infix {
+      width: 199px;
+      display: flex;
+    }
+
+    .mat-mdc-form-field-icon-suffix {
+      padding: 8px;
+    }
+
+    .mat-button-toggle-button {
+      width: 106px;
+      height: 56px;
+    }
+
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+      color: #1c1b1f;
+    }
+
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+
+  .form-field-date {
+    ::ng-deep {
+      .mat-mdc-form-field-infix {
+        width: 175px;
+      }
+    }
+  }
+
+  .contacts-input-email {
+    ::ng-deep {
+      .mat-mdc-form-field-infix {
+        width: 386px;
+      }
+    }
+  }
+}
+
+.passenger-header {
+  padding: 10px 0;
+  display: flex;
+  gap: 12px;
+}
+
+.passenger-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.passenger-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #11397e;
+}
+
+.passenger-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  padding-bottom: 20px;
+}
+
+.mat-icon-invalid {
+  color: #b3261e;
+  transform: rotate(180deg);
+}
+
+.mat-icon-info {
+  width: 24px;
+  height: 24px;
+  color: rgb(126, 126, 128);
+  cursor: pointer;
+}
+
+.passengers-header {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #10264c;
+}
+
+.passengers-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.passengers-card {
+  background: #ffffff;
+  padding: 32px 44px;
+}
+
+.passengers-data {
+  padding-top: 24px;
+  padding-bottom: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.special-block {
+  display: flex;
+  gap: 17px;
+}
+
+.switch {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 52px;
+  height: 32px;
+  background-color: #f4f6f9;
+  border: 2px solid #74767a;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background-color ease 1s;
+}
+
+.switch-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 2px;
+  border-radius: 12px;
+  background-color: #74767a;
+  background-image: url(../../../../assets/cancel_black.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translateX(0);
+  transition: transform ease 0.6s;
+}
+
+.switch-input {
+  display: none;
+}
+
+.special-block {
+  input:checked + .switch {
+    background-color: #11397e;
+    border: none;
+  }
+
+  input:checked + .switch .switch-icon {
+    background-image: url(../../../../assets/icon-selected.svg);
+    background-color: #ffffff;
+    transform: translateX(100%);
+  }
+}
+
+.special-assistance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.block-contacts {
+  padding: 40px 0;
+}
+
+.contacts-input {
+  background-color: #ffffff;
+  padding: 32px 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.block-navigation {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+.button-back {
+  width: 126px;
+  height: 60px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: #11397e;
+  border: none;
+  background-color: #b4b4b4;
+  cursor: pointer;
+}
+
+.button-continue {
+  width: 126px;
+  height: 60px;
+  background-color: #11397e;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.baggage {
+  padding: 15px 0;
+  font-weight: 500;
+  font-size: 20px;
+}

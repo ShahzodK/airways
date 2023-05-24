@@ -1,5 +1,16 @@
 .background-opacity {
   background-color: rgba(116, 118, 122, 0.2);
+}
+
+.background-white {
+  background-color: white;
+}
+
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 
   ::ng-deep {
     .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -67,6 +78,7 @@
   background-image: url(../../../../assets/airways-icon.svg);
   background-repeat: no-repeat;
   background-position: left;
+  cursor: pointer;
 }
 
 .button-icon {

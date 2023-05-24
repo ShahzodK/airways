@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, map } from 'rxjs';
-import { ITicket } from 'app/booking-ticket/models/ticket.model';
+import { ITicket } from 'app/booking/models/ticket.model';
 import { selectSearchFlight, selectSearchForm } from 'app/redux/selectors/flights.selectors';
 import { IDate } from 'app/shared/models/date.model';
 import { saveSelectedTickets } from 'app/redux/actions/flights.actions';
@@ -16,7 +17,8 @@ export class TicketSelectionComponent implements OnInit  {
   constructor(
               private store: Store,
               private elementRef: ElementRef,
-              private renderer: Renderer2
+              private renderer: Renderer2,
+              private router: Router
               ) {}
 
   public searchFlight$ = this.store.select(selectSearchFlight);
@@ -175,6 +177,6 @@ export class TicketSelectionComponent implements OnInit  {
   public saveTickets() {
     if(this.selectedDestinationTicket) this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket,  destinationTicket: this.selectedDestinationTicket}))
     else this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket}))
-
+    this.router.navigate(['booking'])
   }
 }

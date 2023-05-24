@@ -1,5 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import * as FlightActions from '../actions/flights.actions'
+
+import * as FlightActions from '../actions/flights.actions';
+import { savePassengersForm } from '../actions/passengers.actions';
 import { IFlightsState } from '../flightState.model';
 
 export const initialState: IFlightsState = {
@@ -13,6 +15,15 @@ export const initialState: IFlightsState = {
     start: new Date(),
     end: new Date(),
     passengers: []
+  },
+  passengersForm: {
+    passengers: [],
+    contacts: {
+      country: '',
+      phone: '',
+      email: '',
+      cardNumber: '',
+    },
   },
   selectedTickets: {
     departure: {
@@ -52,6 +63,13 @@ export const flightsReducer = createReducer(
     ...state,
     searchForm
   })),
+  on(
+    savePassengersForm,
+    (state, { passengersForm }): IFlightsState => ({
+      ...state,
+      passengersForm,
+    })
+  ),
   on(FlightActions.saveSelectedTickets, (state, { departureTicket, destinationTicket }): IFlightsState => ({
     ...state,
     selectedTickets: {departure: departureTicket, destination: destinationTicket},

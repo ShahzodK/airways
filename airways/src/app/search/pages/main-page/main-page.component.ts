@@ -92,7 +92,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
       formValue.passengers = this.mainService.passengers.map(item => item.trim());
       this.store.dispatch(sendSearchForm({flight: formValue}));
       setTimeout(() => {
-        this.router.navigate(['/booking-ticket']);
+        this.router.navigate(['booking/tickets']);
       }, 100);
     }
   }

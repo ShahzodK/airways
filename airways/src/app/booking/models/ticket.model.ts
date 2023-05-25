@@ -6,5 +6,7 @@ export interface ITicket {
     duration: string,
     price: string,
     flight_no: string,
-    passengers: string[]
+    passengers: string[],
+    seats: string[],
+    reserved_tickets: string[]
 }

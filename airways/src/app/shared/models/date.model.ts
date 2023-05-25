@@ -8,5 +8,6 @@ export interface IDate {
     }
     departure_time: string,
     arrival_time: string,
-    duration: string
+    duration: string,
+    reserved_tickets: string[]
 }

@@ -7,6 +7,6 @@ export interface IFlights {
     destination: string,
     seats_amount: number,
     columns: number,
-    rows: string[],
+    rows: string,
     dates: IDate[]
 }

@@ -34,7 +34,9 @@ export const initialState: IFlightsState = {
       duration: '',
       price: '',
       flight_no: '',
-      passengers: []
+      passengers: [],
+      seats: [],
+      reserved_tickets: []
     },
     destination: {
       arrival_time: '',
@@ -44,7 +46,9 @@ export const initialState: IFlightsState = {
       duration: '',
       price: '',
       flight_no: '',
-      passengers: []
+      passengers: [],
+      seats: [],
+      reserved_tickets: []
     }
   }
 }

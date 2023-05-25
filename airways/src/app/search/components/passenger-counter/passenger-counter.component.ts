@@ -17,16 +17,16 @@ export class PassengerCounterComponent {
   public increase() {
     switch (this.passengerType) {
       case 'Adults':
-        this.mainService.adultCount++;
+        if(this.mainService.adultCount < 9) this.mainService.adultCount++;
         break;
       case 'Child':
         this.mainService.adultCount == 0 ? this.mainService.adultCount++ : this.mainService.adultCount;
-        this.mainService.childCount++;
+        if(this.mainService.childCount < 9) this.mainService.childCount++;
         break;
       case 'Infant':
         if(!this.mainService.adultCount) this.mainService.adultCount++;
         this.mainService.adultCount == 0 ? this.mainService.adultCount++ : this.mainService.adultCount;
-        this.mainService.infantCount++;
+        if(this.mainService.infantCount < 9) this.mainService.infantCount++;
         break;
 
       default:

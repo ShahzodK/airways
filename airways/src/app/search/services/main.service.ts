@@ -24,7 +24,12 @@ export class MainService {
     return this.http.get<string[]>(`${api}/flights_name`);
   }
 
-  public searchFlight(flight: ISearchForm): Observable<IFlights> {
-    return this.http.get<IFlights>(`${api}/flights?departure=${flight.departure}&destination=${flight.destination}`)
+  public searchFlight(flight: ISearchForm): Observable<IFlights[]> {
+    if(+flight.tripType == 1) return this.http.get<IFlights[]>(`${api}/flights?departure=${flight.departure}&destination=${flight.destination}&departure=${flight.destination}&destination=${flight.departure}`);
+    else return this.http.get<IFlights[]>(`${api}/flights?departure=${flight.departure}&destination=${flight.destination}`);
+  }
+
+  public getPassengersCount() {
+    return this.passengers.reduce((acc, curr) => +curr[0] + acc, 0)
   }
 }

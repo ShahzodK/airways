@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.component';
+import { BookingTicketPageComponent } from './pages/booking-ticket-page/booking-ticket-page.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'summary',
     component: SummaryPagesComponent,
   },
+  {
+     path: 'tickets',
+    component: BookingTicketPageComponent,
+  }
+
 ];
 
 @NgModule({

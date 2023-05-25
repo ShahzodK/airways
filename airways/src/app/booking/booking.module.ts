@@ -9,6 +9,9 @@ import { BookingCardComponent } from './components/booking-card/booking-card.com
 import { BookingPassengersComponent } from './components/booking-passengers/booking-passengers.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.component';
+import { BookingTicketPageComponent } from 'app/booking/pages/booking-ticket-page/booking-ticket-page.component';
+import { FlightInfoComponent } from './components/flight-info/flight-info.component';
+import { TicketSelectionComponent } from './components/ticket-selection/ticket-selection.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +19,9 @@ import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.compo
     BookingPassengersComponent,
     BookingPageComponent,
     SummaryPagesComponent,
+    BookingTicketPageComponent,
+    TicketSelectionComponent,
+    FlightInfoComponent
   ],
   imports: [
     CommonModule,

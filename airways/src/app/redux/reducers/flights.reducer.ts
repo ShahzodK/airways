@@ -7,30 +7,14 @@ import { IFlightsState } from '../flightState.model';
 export const initialState: IFlightsState = {
   flights: [],
   flights_name: [],
-  flight: {
-    flight_name: '',
-    flight_no: '',
-    seats_amount: 0,
-    columns: 0,
-    rows: [],
-    dates: [
-      {
-        date: new Date(),
-        prices: {
-          adult: '',
-          child: '',
-          infant: '',
-        },
-      },
-    ],
-  },
+  flight: [],
   searchForm: {
     tripType: '',
     departure: '',
     destination: '',
     start: new Date(),
     end: new Date(),
-    passengers: [],
+    passengers: []
   },
   passengersForm: {
     passengers: [],
@@ -41,36 +25,53 @@ export const initialState: IFlightsState = {
       cardNumber: '',
     },
   },
-};
+  selectedTickets: {
+    departure: {
+      arrival_time: '',
+      date: new Date(),
+      departure_time: '',
+      disabled: true,
+      duration: '',
+      price: '',
+      flight_no: '',
+      passengers: []
+    },
+    destination: {
+      arrival_time: '',
+      date: new Date(),
+      departure_time: '',
+      disabled: true,
+      duration: '',
+      price: '',
+      flight_no: '',
+      passengers: []
+    }
+  }
+}
 
 export const flightsReducer = createReducer(
   initialState,
-  on(
-    FlightActions.fetchFlightsNameSuccess,
-    (state, { flights_name }): IFlightsState => ({
-      ...state,
-      flights_name,
-    })
-  ),
-  on(
-    FlightActions.sendSearchFormSuccess,
-    (state, { flight }): IFlightsState => ({
-      ...state,
-      flight,
-    })
-  ),
-  on(
-    FlightActions.saveSearchForm,
-    (state, { searchForm }): IFlightsState => ({
-      ...state,
-      searchForm,
-    })
-  ),
+  on(FlightActions.fetchFlightsNameSuccess, (state, { flights_name }): IFlightsState => ({
+    ...state,
+    flights_name
+  })),
+  on(FlightActions.sendSearchFormSuccess, (state, { flight }): IFlightsState => ({
+    ...state,
+    flight
+  })),
+  on(FlightActions.saveSearchForm, (state, { searchForm }): IFlightsState => ({
+    ...state,
+    searchForm
+  })),
   on(
     savePassengersForm,
     (state, { passengersForm }): IFlightsState => ({
       ...state,
       passengersForm,
     })
-  )
-);
+  ),
+  on(FlightActions.saveSelectedTickets, (state, { departureTicket, destinationTicket }): IFlightsState => ({
+    ...state,
+    selectedTickets: {departure: departureTicket, destination: destinationTicket},
+  }))
+)

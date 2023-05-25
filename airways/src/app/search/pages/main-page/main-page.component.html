@@ -31,7 +31,7 @@
         <div class="search-form-trip-info">
           <mat-form-field class="search-form-trip-date" appearance="fill" floatLabel="always">
             <ng-container *ngIf="isRoundTrip; else oneWay">
-              <mat-date-range-input [rangePicker]="picker" [dateFilter]="dateFilter" class="search-form-trip-date-range">
+              <mat-date-range-input [rangePicker]="picker" class="search-form-trip-date-range">
                 <input matStartDate class="search-form-trip-date-input" formControlName="start" matInput>
                 <input matEndDate class="search-form-trip-date-input" formControlName="end" matInput>
               </mat-date-range-input>

@@ -20,5 +20,33 @@
 .preview-img {
   width: 24px;
   height: 24px;
-  padding: 156px 40px 156px 48px;
+}
+
+.button-block {
+  display: flex;
+  gap: 40px;
+}
+
+.button {
+  width: 126px;
+  height: 60px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  color: #11397e;
+  background-color: transparent;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-add {
+  width: 171px;
+  border: 1px solid #11397e;
+}
+
+.button-buy {
+  background-color: #11397e;
+  color: #ffffff;
 }

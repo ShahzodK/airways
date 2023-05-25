@@ -50,3 +50,9 @@
   background-color: #11397e;
   color: #ffffff;
 }
+
+.block-orders {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

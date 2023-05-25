@@ -2,15 +2,21 @@
   <img src="../../../../assets/preview.svg" class="preview-img" />
   <p class="preview-text">Summary</p>
 </div>
-<div>
-  <p>в одну сторону</p>
+
+<div class="block-orders">
+  <ng-container *ngIf="flightDetailsDeparture$ | async as flightDetails">
+    <app-order-card [flightDetails]="flightDetails"></app-order-card>
+  </ng-container>
+
+  <ng-container *ngIf="flightDetailsDestination$ | async as flightDetails">
+    <app-order-card [flightDetails]="flightDetails"></app-order-card>
+  </ng-container>
 </div>
-<div>
-  <p>обратно</p>
-</div>
+
 <div>
   <p>конечная стоимость</p>
 </div>
+
 <div class="button-block">
   <button class="button-back button" (click)="toBack()">Back</button>
   <button class="button-add button">Add to order cart</button>

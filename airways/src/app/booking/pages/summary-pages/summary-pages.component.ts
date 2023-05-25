@@ -2,9 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
+import { IFlightDetails } from 'app/booking/models/flightDetails.model';
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
-import { selectPassengers } from 'app/redux/selectors/flights.selectors';
-import { Subscription } from 'rxjs';
+import {
+  flightDetailsDeparture,
+  flightDetailsDestination,
+  selectPassengers,
+  typeTrip,
+} from 'app/redux/selectors/flights.selectors';
+import { Observable, Subscription } from 'rxjs';
 
 import { IPassenger } from '../../models/passengersForm.model';
 
@@ -18,8 +24,14 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
 
   passengers!: IPassenger[];
 
+  typeTrip$!: Observable<string>;
+
+  flightDetailsDeparture$!: Observable<IFlightDetails>;
+
+  flightDetailsDestination$!: Observable<IFlightDetails | null>;
+
   constructor(
-    private store: Store,
+    public store: Store,
     private router: Router,
     private colorScheme: ColorSchemeService
   ) {
@@ -31,6 +43,12 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     this.passengers$ = this.store
       .select(selectPassengers)
       .subscribe((data) => (this.passengers = data));
+
+    this.typeTrip$ = this.store.select(typeTrip);
+    this.flightDetailsDeparture$ = this.store.select(flightDetailsDeparture);
+    this.flightDetailsDestination$ = this.store.select(
+      flightDetailsDestination
+    );
   }
 
   ngOnDestroy(): void {

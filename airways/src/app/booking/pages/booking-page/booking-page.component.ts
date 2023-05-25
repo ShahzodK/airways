@@ -174,4 +174,9 @@ export class BookingPageComponent implements OnInit, OnDestroy {
       this.passengersArray.push(elem);
     });
   }
+
+  toBack() {
+    this.router.navigateByUrl('/booking/tickets');
+    this.colorScheme.forPageTickets();
+  }
 }

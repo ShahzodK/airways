@@ -12,6 +12,7 @@ import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.compo
 import { BookingTicketPageComponent } from 'app/booking/pages/booking-ticket-page/booking-ticket-page.component';
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 import { TicketSelectionComponent } from './components/ticket-selection/ticket-selection.component';
+import { OrderCardComponent } from './components/order-card/order-card.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TicketSelectionComponent } from './components/ticket-selection/ticket-s
     SummaryPagesComponent,
     BookingTicketPageComponent,
     TicketSelectionComponent,
-    FlightInfoComponent
+    FlightInfoComponent,
+    OrderCardComponent
   ],
   imports: [
     CommonModule,

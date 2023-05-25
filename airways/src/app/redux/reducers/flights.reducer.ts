@@ -10,11 +10,11 @@ export const initialState: IFlightsState = {
   flight: [],
   searchForm: {
     tripType: '',
-    departure: '',
-    destination: '',
+    departure: 'Дублин',
+    destination: 'Прага',
     start: new Date(),
     end: new Date(),
-    passengers: []
+    passengers: [],
   },
   passengersForm: {
     passengers: [],
@@ -27,42 +27,51 @@ export const initialState: IFlightsState = {
   },
   selectedTickets: {
     departure: {
-      arrival_time: '',
+      arrival_time: '18.20',
       date: new Date(),
-      departure_time: '',
+      departure_time: '65.25',
       disabled: true,
       duration: '',
       price: '',
-      flight_no: '',
-      passengers: []
+      flight_no: 'AS3642',
+      passengers: [],
     },
     destination: {
-      arrival_time: '',
+      arrival_time: '47.56',
       date: new Date(),
-      departure_time: '',
+      departure_time: '33.12',
       disabled: true,
       duration: '',
       price: '',
-      flight_no: '',
-      passengers: []
-    }
-  }
-}
+      flight_no: 'AS0000',
+      passengers: [],
+    },
+  },
+};
 
 export const flightsReducer = createReducer(
   initialState,
-  on(FlightActions.fetchFlightsNameSuccess, (state, { flights_name }): IFlightsState => ({
-    ...state,
-    flights_name
-  })),
-  on(FlightActions.sendSearchFormSuccess, (state, { flight }): IFlightsState => ({
-    ...state,
-    flight
-  })),
-  on(FlightActions.saveSearchForm, (state, { searchForm }): IFlightsState => ({
-    ...state,
-    searchForm
-  })),
+  on(
+    FlightActions.fetchFlightsNameSuccess,
+    (state, { flights_name }): IFlightsState => ({
+      ...state,
+      flights_name,
+    })
+  ),
+  on(
+    FlightActions.sendSearchFormSuccess,
+    (state, { flight }): IFlightsState => ({
+      ...state,
+      flight,
+    })
+  ),
+  on(
+    FlightActions.saveSearchForm,
+    (state, { searchForm }): IFlightsState => ({
+      ...state,
+      searchForm,
+    })
+  ),
   on(
     savePassengersForm,
     (state, { passengersForm }): IFlightsState => ({
@@ -70,8 +79,14 @@ export const flightsReducer = createReducer(
       passengersForm,
     })
   ),
-  on(FlightActions.saveSelectedTickets, (state, { departureTicket, destinationTicket }): IFlightsState => ({
-    ...state,
-    selectedTickets: {departure: departureTicket, destination: destinationTicket},
-  }))
-)
+  on(
+    FlightActions.saveSelectedTickets,
+    (state, { departureTicket, destinationTicket }): IFlightsState => ({
+      ...state,
+      selectedTickets: {
+        departure: departureTicket,
+        destination: destinationTicket,
+      },
+    })
+  )
+);

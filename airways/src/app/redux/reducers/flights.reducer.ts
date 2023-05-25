@@ -10,8 +10,8 @@ export const initialState: IFlightsState = {
   flight: [],
   searchForm: {
     tripType: '',
-    departure: '',
-    destination: '',
+    departure: 'Дублин',
+    destination: 'Прага',
     start: new Date(),
     end: new Date(),
     passengers: [],
@@ -27,9 +27,9 @@ export const initialState: IFlightsState = {
   },
   selectedTickets: {
     departure: {
-      arrival_time: '',
+      arrival_time: '18.20',
       date: new Date(),
-      departure_time: '',
+      departure_time: '65.25',
       disabled: true,
       duration: '',
       price: '',
@@ -39,13 +39,12 @@ export const initialState: IFlightsState = {
       reserved_tickets: [],
     },
     destination: {
-      arrival_time: '',
+      arrival_time: '47.56',
       date: new Date(),
-      departure_time: '',
+      departure_time: '33.12',
       disabled: true,
       duration: '',
       price: '',
-
       flight_no: '',
       passengers: [],
       seats: [],

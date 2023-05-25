@@ -43,7 +43,7 @@ export class TicketSelectionComponent implements OnInit  {
     .pipe(
       map(([searchFlight, searchForm ]) => {
         const startDate: IDate[] = JSON.parse(JSON.stringify(searchFlight[0].dates));
-        const startDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean, flight_no?: string, passengers?: string[]}[] = this.addDates(searchForm.start!);
+        const startDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean, flight_no?: string, passengers?: string[], reserved_tickets?: string[], columns?: number, rows?: string[]}[] = this.addDates(searchForm.start!);
         startDates.map((date) => {
           startDate.forEach((flightDates, i) => {
             if(date.date.getTime() == new Date(flightDates.date).getTime()) {
@@ -54,16 +54,21 @@ export class TicketSelectionComponent implements OnInit  {
               date.duration = flightDates.duration;
               date.flight_no = searchFlight[0].flight_no
               date.passengers = searchForm.passengers
+              date.reserved_tickets = flightDates.reserved_tickets
+              date.columns = searchFlight[0].columns;
+              date.rows = JSON.parse(JSON.stringify(searchFlight[0].rows));
             }
             else {
               date.price = date.price ? date.price : ' ';
+              date.columns = searchFlight[0].columns;
+              date.rows = JSON.parse(JSON.stringify(searchFlight[0].rows));
             }
           });
           return date
         })
         if(searchForm.tripType == '1') {
           const endDate: IDate[] = JSON.parse(JSON.stringify(searchFlight[1].dates));
-          const endDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean, flight_no?: string, passengers?: string[]}[] = this.addDates(searchForm.end!)
+          const endDates: {date: Date, price?: string, departure_time?: string, arrival_time?: string, duration?: string, disabled?: boolean, flight_no?: string, passengers?: string[], reserved_tickets?: string[], columns?: number, rows?: string[]}[] = this.addDates(searchForm.end!)
           endDates.map((date) => {
             endDate.forEach((flightDates, i) => {
               if(date.date.getTime() == new Date(flightDates.date).getTime()) {
@@ -74,9 +79,14 @@ export class TicketSelectionComponent implements OnInit  {
                 date.duration = flightDates.duration;
                 date.flight_no = searchFlight[1].flight_no
                 date.passengers = searchForm.passengers
+                date.reserved_tickets = flightDates.reserved_tickets
+                date.columns = searchFlight[1].columns;
+                date.rows = JSON.parse(JSON.stringify(searchFlight[1].rows));
               }
               else {
                 date.price = date.price ? date.price : ' ';
+                date.columns = searchFlight[1].columns;
+                date.rows = JSON.parse(JSON.stringify(searchFlight[1].rows));;
               }
             });
             return date
@@ -139,7 +149,9 @@ export class TicketSelectionComponent implements OnInit  {
         duration: '',
         price: '',
         flight_no: '',
-        passengers: []
+        passengers: [],
+        seats: [],
+        reserved_tickets: []
       }
       tabLabel = this.elementRef.nativeElement.querySelectorAll('.mat-mdc-tab-header')[0];
       this.isDepartureTicketSelected = false;
@@ -154,7 +166,9 @@ export class TicketSelectionComponent implements OnInit  {
         duration: '',
         price: '',
         flight_no: '',
-        passengers: []
+        passengers: [],
+        seats: [],
+        reserved_tickets: []
       };
       tabLabel = this.elementRef.nativeElement.querySelectorAll('.mat-mdc-tab-header')[1];
       this.isDestinationTicketSelected = false;
@@ -162,12 +176,14 @@ export class TicketSelectionComponent implements OnInit  {
     }
     if(direction == 'departure' && action == 'select') {
        this.selectedDepartureTicket = ticket;
+       this.selectedDepartureTicket.seats = [];
        tabLabel = this.elementRef.nativeElement.querySelectorAll('mat-tab-header')[0];
        this.isDepartureTicketSelected = true;
        this.renderer.setStyle(tabLabel, 'display', 'none')
     }
     else if(direction == 'destination' && action == 'select') {
       this.selectedDestinationTicket = ticket;
+      this.selectedDestinationTicket!.seats = [];
        tabLabel = this.elementRef.nativeElement.querySelectorAll('mat-tab-header')[1];
        this.isDestinationTicketSelected = true;
        this.renderer.setStyle(tabLabel, 'display', 'none')
@@ -175,8 +191,25 @@ export class TicketSelectionComponent implements OnInit  {
   }
 
   public saveTickets() {
-    if(this.selectedDestinationTicket) this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket,  destinationTicket: this.selectedDestinationTicket}))
-    else this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket}))
+    if(this.selectedDestinationTicket) {
+      let totalPassengers = +this.selectedDepartureTicket.passengers[0][0] + +this.selectedDepartureTicket.passengers[1][0];
+      for (let i = 1; i <= totalPassengers; i++) {
+        console.log(this.flightDates.departures)
+        let row = this.flightDates.departures[0].rows[Math.floor((i - 1) / this.flightDates.departures[0].columns)];
+        let column = (i - 1) % this.flightDates.departures[0].columns + 1;
+        let seat_number = column + row;
+        if(this.selectedDepartureTicket.reserved_tickets.includes(seat_number)) {
+          totalPassengers++;
+          continue
+        }
+        this.selectedDepartureTicket.seats.push(seat_number);
+        this.selectedDestinationTicket.seats.push(seat_number);
+      }
+      this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket,  destinationTicket: this.selectedDestinationTicket}))
+    }
+    else {
+       this.store.dispatch(saveSelectedTickets({departureTicket: this.selectedDepartureTicket}))
+    }
     this.router.navigate(['booking'])
   }
 }

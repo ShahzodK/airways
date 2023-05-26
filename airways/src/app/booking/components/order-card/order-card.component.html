@@ -8,4 +8,17 @@
     <div class="flight-time">{{ flightDetails.time }}</div>
   </div>
 </div>
-<div>перебор имен</div>
+<div class="passengers-block">
+  <ng-container *ngFor="let passengers of passengersDetails">
+    <div class="passenger-card">
+      <p class="passenger-name">{{ passengers.fullName }}</p>
+      <div class="block-passenger-details">
+        <p>
+          1 carry-on (max. 8 kg)
+          <span *ngIf="passengers.baggage">+ 1 baggage (max. 25 kg)</span>
+        </p>
+        <p *ngIf="passengers.seat">Seat {{ passengers.seat }}</p>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
+import { FormatParamService } from 'app/core/services/format-param.service';
 import { AuthService } from 'app/user/services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     public colorScheme: ColorSchemeService,
+    public format: FormatParamService,
     private router: Router
   ) {}
 

@@ -58,22 +58,88 @@ export const flightDetailsDestination = createSelector(
   }
 );
 
-export const passengersDetails = createSelector(selectFlightsState, (state) => {
-  const array: IPassengersDetails[] = [];
-  state.passengersForm.passengers.forEach((passenger) => {
-    const obj = {
-      fullName: `${passenger.firstName} ${passenger.lastName}`,
-      seat: '33',
-    };
-    // if (passenger.)
-    array.push(obj);
-  });
-  return array;
-});
+export const passengersDetailsDeparture = createSelector(
+  selectFlightsState,
+  (state) => {
+    const array: IPassengersDetails[] = [];
+    const seatsDeparture = state.selectedTickets.departure.seats;
+    const adultsCount = state.searchForm.passengers.reduce((ac, el) => {
+      const [count, name] = el.split(' ');
+      if (name === 'Adults' || name === 'Children') {
+        return +count + ac;
+      } else {
+        return ac;
+      }
+    }, 0);
+    state.passengersForm.passengers.forEach((passenger, index) => {
+      const obj: IPassengersDetails = {
+        fullName: `${passenger.firstName} ${passenger.lastName}`,
+        baggage: passenger.baggage,
+        seat: null,
+      };
+      if (index < adultsCount) {
+        obj.seat = seatsDeparture[index];
+      }
+      array.push(obj);
+    });
+    return array;
+  }
+);
 
-// arrival: {
-//   number: state.selectedTickets.destination?.flight_no,
-//   direction: state.searchForm.destination,
-//   date: state.selectedTickets.destination?.date,
-//   time: `${state.selectedTickets.destination?.departure_time} - ${state.selectedTickets.destination?.arrival_time}`,
-// },
+export const passengersDetailsDestination = createSelector(
+  selectFlightsState,
+  (state) => {
+    const array: IPassengersDetails[] = [];
+    const seatsDestination = state.selectedTickets.destination?.seats;
+    if (seatsDestination && seatsDestination.length !== 0) {
+      const adultsCount = state.searchForm.passengers.reduce((ac, el) => {
+        const [count, name] = el.split(' ');
+        if (name === 'Adults' || name === 'Children') {
+          return +count + ac;
+        } else {
+          return ac;
+        }
+      }, 0);
+      state.passengersForm.passengers.forEach((passenger, index) => {
+        const obj: IPassengersDetails = {
+          fullName: `${passenger.firstName} ${passenger.lastName}`,
+          baggage: passenger.baggage,
+          seat: null,
+        };
+        if (index < adultsCount) {
+          obj.seat = seatsDestination[index];
+        }
+        array.push(obj);
+      });
+      return array;
+    } else return null;
+  }
+);
+
+export const costTrip = createSelector(selectFlightsState, (state) => {
+  let cost = 0;
+  if (state.selectedTickets.destination?.price) {
+    cost += +state.selectedTickets.destination.price;
+  }
+  cost += +state.selectedTickets.departure.price;
+  return state.searchForm.passengers.map((passengers) => {
+    // eslint-disable-next-line prefer-const
+    let [count, type] = passengers.split(' ');
+    let fare = cost * +count;
+    if (type === 'Children') {
+      fare *= 0.8;
+      type = 'Child';
+    }
+    if (type === 'Infants') {
+      fare *= 0.5;
+      type = 'Infant';
+    }
+    return {
+      count: count,
+      type,
+      fare,
+      tax: fare * 0.4,
+      total: fare * 1.4,
+    };
+  });
+});

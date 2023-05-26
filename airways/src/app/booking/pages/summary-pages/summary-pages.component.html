@@ -4,17 +4,70 @@
 </div>
 
 <div class="block-orders">
-  <ng-container *ngIf="flightDetailsDeparture$ | async as flightDetails">
-    <app-order-card [flightDetails]="flightDetails"></app-order-card>
+  <ng-container *ngIf="flightDetailsDeparture$ | async as flightDetailsOneWay">
+    <ng-container
+      *ngIf="passengersDetailsDeparture$ | async as passengersDetailsOneWay"
+    >
+      <app-order-card
+        [flightDetails]="flightDetailsOneWay"
+        [passengersDetails]="passengersDetailsOneWay"
+      ></app-order-card>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="flightDetailsDestination$ | async as flightDetails">
-    <app-order-card [flightDetails]="flightDetails"></app-order-card>
+    <ng-container
+      *ngIf="passengersDetailsDestination$ | async as passengersDetails"
+    >
+      <app-order-card
+        [flightDetails]="flightDetails"
+        [passengersDetails]="passengersDetails"
+      ></app-order-card>
+    </ng-container>
   </ng-container>
 </div>
 
-<div>
-  <p>конечная стоимость</p>
+<div class="block-orders-cost">
+  <ng-container *ngIf="costTrip$ | async as costTrip">
+    <ng-container *ngFor="let cost of costTrip">
+      <div class="container-orders-cost">
+        <div class="block-cost-total">
+          <p>{{ cost.count }} x {{ cost.type }} Fare</p>
+          <p>
+            {{
+              cost.total
+                | currency : format.currency : "symbol-narrow" : "1.2-2"
+            }}
+          </p>
+        </div>
+        <div class="block-cost-fare">
+          <p>Fare</p>
+          <p>
+            {{
+              cost.fare | currency : format.currency : "symbol-narrow" : "1.2-2"
+            }}
+          </p>
+        </div>
+        <div class="block-cost-tax">
+          <p>Tax & Service Charge</p>
+          <p>
+            {{
+              cost.tax | currency : format.currency : "symbol-narrow" : "1.2-2"
+            }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+    <div class="order-cost">
+      <p>Total:</p>
+      <p>
+        {{
+          getTotalCost(costTrip) * format.getIndex()
+            | currency : format.currency : "symbol-narrow" : "1.2-2"
+        }}
+      </p>
+    </div>
+  </ng-container>
 </div>
 
 <div class="button-block">

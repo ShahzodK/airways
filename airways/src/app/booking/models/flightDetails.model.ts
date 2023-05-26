@@ -7,5 +7,14 @@ export interface IFlightDetails {
 
 export interface IPassengersDetails {
   fullName: string;
-  seat: string;
+  baggage: boolean;
+  seat: string | null;
+}
+
+export interface ICostTrip {
+  count: string;
+  type: string;
+  fare: number;
+  tax: number;
+  total: number;
 }

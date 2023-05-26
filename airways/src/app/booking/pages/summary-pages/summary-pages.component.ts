@@ -2,11 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { IFlightDetails } from 'app/booking/models/flightDetails.model';
-import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 import {
+  ICostTrip,
+  IFlightDetails,
+  IPassengersDetails,
+} from 'app/booking/models/flightDetails.model';
+import { ColorSchemeService } from 'app/core/services/color-scheme.service';
+import { FormatParamService } from 'app/core/services/format-param.service';
+import {
+  costTrip,
   flightDetailsDeparture,
   flightDetailsDestination,
+  passengersDetailsDeparture,
+  passengersDetailsDestination,
   selectPassengers,
   typeTrip,
 } from 'app/redux/selectors/flights.selectors';
@@ -30,10 +38,17 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
 
   flightDetailsDestination$!: Observable<IFlightDetails | null>;
 
+  passengersDetailsDeparture$!: Observable<IPassengersDetails[]>;
+
+  passengersDetailsDestination$!: Observable<IPassengersDetails[] | null>;
+
+  costTrip$!: Observable<ICostTrip[]>;
+
   constructor(
     public store: Store,
     private router: Router,
-    private colorScheme: ColorSchemeService
+    private colorScheme: ColorSchemeService,
+    public format: FormatParamService
   ) {
     this.colorScheme.changeSchemeFalse();
     this.colorScheme.forPageSummary();
@@ -49,6 +64,13 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     this.flightDetailsDestination$ = this.store.select(
       flightDetailsDestination
     );
+    this.passengersDetailsDeparture$ = this.store.select(
+      passengersDetailsDeparture
+    );
+    this.passengersDetailsDestination$ = this.store.select(
+      passengersDetailsDestination
+    );
+    this.costTrip$ = this.store.select(costTrip);
   }
 
   ngOnDestroy(): void {
@@ -58,5 +80,9 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
   toBack() {
     this.router.navigateByUrl('/booking');
     this.colorScheme.forPageBooking();
+  }
+
+  getTotalCost(arr: ICostTrip[]) {
+    return arr.reduce((ac, el) => ac + el.total, 0);
   }
 }

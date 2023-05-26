@@ -159,8 +159,6 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   }
 
   parsePassengers(arr: string[]) {
-    console.log(arr);
-
     const passengers: string[] = [];
     arr.forEach((passenger) => {
       const [count, type] = passenger.split(' ');

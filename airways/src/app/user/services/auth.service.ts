@@ -21,10 +21,6 @@ export class AuthService {
 
   isLoginPageVisible: Observable<boolean>;
 
-  defaultDateFormat = 'MDY';
-
-  defaultCurrency = 'EUR';
-
   isBadRequest = false;
 
   userId!: string;

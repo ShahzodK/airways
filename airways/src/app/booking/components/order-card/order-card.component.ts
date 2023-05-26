@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { IFlightDetails } from 'app/booking/models/flightDetails.model';
+import {
+  IFlightDetails,
+  IPassengersDetails,
+} from 'app/booking/models/flightDetails.model';
 
 @Component({
   selector: 'app-order-card',
@@ -9,4 +12,6 @@ import { IFlightDetails } from 'app/booking/models/flightDetails.model';
 })
 export class OrderCardComponent {
   @Input() flightDetails!: IFlightDetails;
+
+  @Input() passengersDetails!: IPassengersDetails[];
 }

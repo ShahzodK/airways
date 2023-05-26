@@ -18,3 +18,20 @@ export interface ICostTrip {
   tax: number;
   total: number;
 }
+
+export interface IOrder {
+  number: string;
+  departure: string;
+  destination: string;
+  type: string;
+  dateDeparture: Date;
+  timeDeparture: string;
+  dateDestination: Date | null | undefined;
+  timeDestination: string | null;
+  passengers: {
+    Adults: string;
+    Children: string;
+    Infants: string;
+  };
+  price: number;
+}

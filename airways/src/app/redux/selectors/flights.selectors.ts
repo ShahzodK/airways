@@ -26,11 +26,6 @@ export const selectPassengers = createSelector(
   (state) => state.passengersForm.passengers
 );
 
-export const typeTrip = createSelector(
-  selectFlightsState,
-  (state) => state.searchForm.tripType
-);
-
 export const flightDetailsDeparture = createSelector(
   selectFlightsState,
   (state) => ({
@@ -143,3 +138,31 @@ export const costTrip = createSelector(selectFlightsState, (state) => {
     };
   });
 });
+
+export const order = createSelector(selectFlightsState, (state) => ({
+  number: state.selectedTickets.departure.flight_no,
+  departure: state.searchForm.departure,
+  destination: state.searchForm.destination,
+  type: state.searchForm.tripType === '1' ? 'Round Trip' : 'One way',
+  dateDeparture: state.selectedTickets.departure.date,
+  timeDeparture: `${state.selectedTickets.departure.departure_time} - ${state.selectedTickets.departure.arrival_time}`,
+  dateDestination:
+    state.searchForm.tripType === '1'
+      ? state.selectedTickets.destination?.date
+      : null,
+  timeDestination:
+    state.searchForm.tripType === '1'
+      ? `${state.selectedTickets.destination?.departure_time} - ${state.selectedTickets.destination?.arrival_time}`
+      : null,
+  passengers: {
+    Adults: state.searchForm.passengers[0][0],
+    Children: state.searchForm.passengers[1][0],
+    Infants: state.searchForm.passengers[2][0],
+  },
+  price: 0,
+}));
+
+export const ordersStorage = createSelector(
+  selectFlightsState,
+  (state) => state.orders
+);

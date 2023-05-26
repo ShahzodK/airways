@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { BookingCartPagesComponent } from './pages/booking-cart-pages/booking-cart-pages.component';
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
-import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.component';
 import { BookingTicketPageComponent } from './pages/booking-ticket-page/booking-ticket-page.component';
+import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.component';
 
 const routes: Routes = [
   {
@@ -15,10 +16,13 @@ const routes: Routes = [
     component: SummaryPagesComponent,
   },
   {
-     path: 'tickets',
+    path: 'tickets',
     component: BookingTicketPageComponent,
-  }
-
+  },
+  {
+    path: 'cart',
+    component: BookingCartPagesComponent,
+  },
 ];
 
 @NgModule({

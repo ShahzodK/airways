@@ -1,0 +1,50 @@
+<div class="block-table-header">
+  <p class="colum-number">No.</p>
+  <p class="colum-flights">Flights</p>
+  <p class="colum-type">Type Trip</p>
+  <p class="colum-data">Data & Time</p>
+  <p class="colum-passengers">Passengers</p>
+  <p class="colum-price">Price</p>
+</div>
+
+<div class="block-table-body">
+  <ng-container *ngFor="let order of orders">
+    <div class="block-table-row">
+      <input type="checkbox" class="order-checkbox" />
+      <div class="block-row-order">
+        <p class="row-number">{{ order.number }}</p>
+        <div class="row-flights">
+          <p>{{ order.departure }} - {{ order.destination }}</p>
+          <p *ngIf="order.type === 'Round Trip'">
+            {{ order.destination }} - {{ order.departure }}
+          </p>
+        </div>
+        <p class="row-type">{{ order.type }}</p>
+        <div class="row-data">
+          <p>
+            {{ order.dateDeparture | date : format.dateFormat }},
+            {{ order.timeDeparture }}
+          </p>
+          <p *ngIf="order.dateDestination">
+            {{ order.dateDestination | date : format.dateFormat }},
+            {{ order.timeDestination }}
+          </p>
+        </div>
+        <div class="row-passengers">
+          <p>{{ order.passengers.Adults }} x Adult</p>
+          <p *ngIf="order.passengers.Children !== '0'">
+            {{ order.passengers.Adults }} x Child
+          </p>
+          <p *ngIf="order.passengers.Infants !== '0'">
+            {{ order.passengers.Infants }} x Infant
+          </p>
+        </div>
+        <p class="row-price">
+          {{
+            order.price | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</div>

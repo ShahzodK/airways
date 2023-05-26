@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FormatParamService {
-  defaultDateFormat = 'MDY';
+  dateFormat = 'MM/dd/YYYY';
 
   currency = 'EUR';
 

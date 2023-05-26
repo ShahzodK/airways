@@ -1,0 +1,6 @@
+<div class="cart-wrapper">
+  <p class="cart-title">Cart</p>
+  <ng-container *ngIf="orders$ | async as orders">
+    <app-table-header [orders]="orders"></app-table-header>
+  </ng-container>
+</div>

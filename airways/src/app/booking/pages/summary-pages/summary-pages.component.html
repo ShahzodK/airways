@@ -4,74 +4,65 @@
 </div>
 
 <div class="block-orders">
-  <ng-container *ngIf="flightDetailsDeparture$ | async as flightDetailsOneWay">
-    <ng-container
-      *ngIf="passengersDetailsDeparture$ | async as passengersDetailsOneWay"
-    >
-      <app-order-card
-        [flightDetails]="flightDetailsOneWay"
-        [passengersDetails]="passengersDetailsOneWay"
-      ></app-order-card>
-    </ng-container>
-  </ng-container>
+  <app-order-card
+    [flightDetails]="flightDetailsDeparture"
+    [passengersDetails]="passengersDetailsDeparture"
+  ></app-order-card>
 
-  <ng-container *ngIf="flightDetailsDestination$ | async as flightDetails">
-    <ng-container
-      *ngIf="passengersDetailsDestination$ | async as passengersDetails"
-    >
+  <ng-container *ngIf="flightDetailsDestination">
+    <ng-container *ngIf="passengersDetailsDestination">
       <app-order-card
-        [flightDetails]="flightDetails"
-        [passengersDetails]="passengersDetails"
+        [flightDetails]="flightDetailsDestination"
+        [passengersDetails]="passengersDetailsDestination"
       ></app-order-card>
     </ng-container>
   </ng-container>
 </div>
 
 <div class="block-orders-cost">
-  <ng-container *ngIf="costTrip$ | async as costTrip">
-    <ng-container *ngFor="let cost of costTrip">
-      <div class="container-orders-cost">
-        <div class="block-cost-total">
-          <p>{{ cost.count }} x {{ cost.type }} Fare</p>
-          <p>
-            {{
-              cost.total
-                | currency : format.currency : "symbol-narrow" : "1.2-2"
-            }}
-          </p>
-        </div>
-        <div class="block-cost-fare">
-          <p>Fare</p>
-          <p>
-            {{
-              cost.fare | currency : format.currency : "symbol-narrow" : "1.2-2"
-            }}
-          </p>
-        </div>
-        <div class="block-cost-tax">
-          <p>Tax & Service Charge</p>
-          <p>
-            {{
-              cost.tax | currency : format.currency : "symbol-narrow" : "1.2-2"
-            }}
-          </p>
-        </div>
+  <ng-container *ngFor="let cost of costTrip">
+    <div class="container-orders-cost">
+      <div class="block-cost-total">
+        <p>{{ cost.count }} x {{ cost.type }} Fare</p>
+        <p>
+          {{
+            cost.total | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
       </div>
-    </ng-container>
-    <div class="order-cost">
-      <p>Total:</p>
-      <p>
-        {{
-          getTotalCost(costTrip) * format.getIndex()
-            | currency : format.currency : "symbol-narrow" : "1.2-2"
-        }}
-      </p>
+      <div class="block-cost-fare">
+        <p>Fare</p>
+        <p>
+          {{
+            cost.fare | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
+      <div class="block-cost-tax">
+        <p>Tax & Service Charge</p>
+        <p>
+          {{
+            cost.tax | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
     </div>
   </ng-container>
+  <div class="order-cost">
+    <p>Total:</p>
+    <p>
+      {{
+        getTotalCost(costTrip) * format.getIndex()
+          | currency : format.currency : "symbol-narrow" : "1.2-2"
+      }}
+    </p>
+  </div>
 </div>
 
 <div class="button-block">
   <button class="button-back button" (click)="toBack()">Back</button>
-  <button class="button-add button">Add to order cart</button>
-  <button class="button-buy button">Buy now</button>
+  <button class="button-add button" (click)="addToCart()">
+    Add to order cart
+  </button>
+  <button class="button-buy button" (click)="buyNow()">Buy now</button>
 </div>

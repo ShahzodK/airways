@@ -19,8 +19,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { TableHeaderComponent } from './components/table-header/table-header.component';
+import { TableRowComponent } from './components/table-row/table-row.component';
+
 @NgModule({
-  declarations: [],
+  declarations: [TableHeaderComponent, TableRowComponent],
   imports: [CommonModule],
   exports: [
     MatButtonModule,
@@ -43,6 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatSlideToggleModule,
     HttpClientModule,
+    TableHeaderComponent,
   ],
   providers: [MatDatepickerModule],
 })

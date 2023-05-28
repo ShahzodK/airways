@@ -9,6 +9,7 @@ import { MainService } from './../../services/main.service';
 import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { sendSearchForm } from './../../../redux/actions/flights.actions';
+import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 
 @Component({
   selector: 'app-main-page',
@@ -56,7 +57,8 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(
     public mainService: MainService,
     public store: Store,
-    public router: Router
+    public router: Router,
+    private colorScheme: ColorSchemeService
   ) {}
 
   public searchForm = new FormGroup({
@@ -93,6 +95,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
       this.store.dispatch(sendSearchForm({flight: formValue}));
       setTimeout(() => {
         this.router.navigate(['booking/tickets']);
+        this.colorScheme.forPageTickets();
       }, 100);
     }
   }

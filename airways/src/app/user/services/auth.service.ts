@@ -82,4 +82,12 @@ export class AuthService {
       this.userName$.next(newUser.user.firstName);
     });
   }
+
+  logOut() {
+    localStorage.removeItem('userAirwaysToken');
+    localStorage.removeItem('userAirwaysName');
+    localStorage.removeItem('userAirwaysId');
+    this.userName$.next('Sign in');
+    this.isLoginPageVisible$.next(true);
+  }
 }

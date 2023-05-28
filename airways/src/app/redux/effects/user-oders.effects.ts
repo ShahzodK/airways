@@ -3,13 +3,18 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { IUser } from 'app/user/model/user.interface';
+import { AuthService } from 'app/user/services/auth.service';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { initialUserOrders, saveUserOrders } from '../actions/orders.actions';
 
 @Injectable()
 export class UserOrdersEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private auth: AuthService
+  ) {}
 
   loadUserOrders$ = createEffect(() => {
     return this.actions$.pipe(
@@ -26,10 +31,14 @@ export class UserOrdersEffects {
             map((user: IUser) =>
               saveUserOrders({ userOrders: user.orders ?? [] })
             ),
-            catchError(() => of(saveUserOrders({ userOrders: [] })))
+            catchError((error) => {
+              if (error.statusText === 'Unauthorized') {
+                this.auth.logOut();
+              }
+              return of(saveUserOrders({ userOrders: [] }));
+            })
           );
       })
     );
   });
 }
-// catchError(() => saveUserOrders({ userOrders: [] })))

@@ -18,7 +18,6 @@ export class BookingTicketPageComponent {
   public searchFlight$ = this.store.select(selectSearchFlight);
 
   constructor(private store: Store, private colorScheme: ColorSchemeService) {
-    this.colorScheme.changeSchemeFalse();
-    this.colorScheme.forPageBooking();
+    this.colorScheme.forPageTickets();
   }
 }

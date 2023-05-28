@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   redirectToSearch() {
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');
-      this.colorScheme.changeScheme();
+      this.colorScheme.forPageMain();
     }
   }
 

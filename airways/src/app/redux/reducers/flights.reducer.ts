@@ -1,20 +1,26 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as FlightActions from '../actions/flights.actions';
+import {
+  initialUserOrders,
+  saveOrders,
+  saveUserOrders,
+} from '../actions/orders.actions';
 import { savePassengersForm } from '../actions/passengers.actions';
 import { IFlightsState } from '../flightState.model';
 
 export const initialState: IFlightsState = {
+  orders: JSON.parse(localStorage.getItem('airwaysOrders') ?? '[]'),
   flights: [],
   flights_name: [],
   flight: [],
   searchForm: {
     tripType: '',
-    departure: 'Дублин',
-    destination: 'Прага',
+    departure: '',
+    destination: '',
     start: new Date(),
     end: new Date(),
-    passengers: [],
+    passengers: ['0 Adults', '0 Children', '0 Infants'],
   },
   passengersForm: {
     passengers: [],
@@ -27,9 +33,9 @@ export const initialState: IFlightsState = {
   },
   selectedTickets: {
     departure: {
-      arrival_time: '18.20',
+      arrival_time: '',
       date: new Date(),
-      departure_time: '65.25',
+      departure_time: '',
       disabled: true,
       duration: '',
       price: '',
@@ -39,9 +45,9 @@ export const initialState: IFlightsState = {
       reserved_tickets: [],
     },
     destination: {
-      arrival_time: '47.56',
+      arrival_time: '',
       date: new Date(),
-      departure_time: '33.12',
+      departure_time: '',
       disabled: true,
       duration: '',
       price: '',
@@ -91,6 +97,27 @@ export const flightsReducer = createReducer(
         departure: departureTicket,
         destination: destinationTicket,
       },
+    })
+  ),
+  on(
+    saveOrders,
+    (state, { orders }): IFlightsState => ({
+      ...state,
+      orders,
+    })
+  ),
+  on(
+    initialUserOrders,
+    (state): IFlightsState => ({
+      ...state,
+      userOrders: [],
+    })
+  ),
+  on(
+    saveUserOrders,
+    (state, { userOrders }): IFlightsState => ({
+      ...state,
+      userOrders: userOrders,
     })
   )
 );

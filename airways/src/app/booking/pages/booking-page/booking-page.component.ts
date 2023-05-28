@@ -38,7 +38,6 @@ export class BookingPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private colorScheme: ColorSchemeService
   ) {
-    this.colorScheme.changeSchemeFalse();
     this.colorScheme.forPageBooking();
 
     this.passengersForm = this.fb.group({
@@ -143,7 +142,6 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   submit() {
     // if (this.passengersForm.valid) {
     const formValue: IPassengersForm = this.passengersForm.getRawValue();
-    console.log(formValue);
     this.store.dispatch(savePassengersForm({ passengersForm: formValue }));
     this.router.navigateByUrl('booking/summary');
     this.colorScheme.forPageSummary();

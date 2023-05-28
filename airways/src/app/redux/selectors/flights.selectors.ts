@@ -114,9 +114,9 @@ export const passengersDetailsDestination = createSelector(
 export const costTrip = createSelector(selectFlightsState, (state) => {
   let cost = 0;
   if (state.selectedTickets.destination?.price) {
-    cost += +state.selectedTickets.destination.price;
+    cost += +parseInt(state.selectedTickets.destination.price);
   }
-  cost += +state.selectedTickets.departure.price;
+  cost += +parseInt(state.selectedTickets.departure.price);
   return state.searchForm.passengers.map((passengers) => {
     // eslint-disable-next-line prefer-const
     let [count, type] = passengers.split(' ');

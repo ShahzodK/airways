@@ -11,7 +11,10 @@ import {
 } from 'app/booking/models/flightDetails.model';
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 import { FormatParamService } from 'app/core/services/format-param.service';
-import { saveOrders } from 'app/redux/actions/orders.actions';
+import {
+  initialUserOrders,
+  saveOrders,
+} from 'app/redux/actions/orders.actions';
 import {
   costTrip,
   flightDetailsDeparture,
@@ -23,7 +26,7 @@ import {
 } from 'app/redux/selectors/flights.selectors';
 import { IUser } from 'app/user/model/user.interface';
 import { AuthService } from 'app/user/services/auth.service';
-import { Subscription } from 'rxjs';
+import { catchError, of, Subscription } from 'rxjs';
 
 import { IPassenger } from '../../models/passengersForm.model';
 
@@ -69,7 +72,6 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     private auth: AuthService,
     private http: HttpClient
   ) {
-    this.colorScheme.changeSchemeFalse();
     this.colorScheme.forPageSummary();
   }
 
@@ -125,11 +127,11 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
   buyNow() {
     if (this.auth.isUserLoggedIn()) {
       this.createUserOrder();
-      // this.router.navigateByUrl('/search');
-      this.colorScheme.changeSchemeTrue();
+      this.router.navigateByUrl('/user-account');
+      this.colorScheme.forCart();
     } else {
       this.router.navigateByUrl('/search');
-      this.colorScheme.changeSchemeTrue();
+      this.colorScheme.forPageMain();
     }
   }
 
@@ -146,6 +148,7 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
       this.store.dispatch(saveOrders({ orders: [this.order] }));
     }
     this.router.navigateByUrl('/booking/cart');
+    this.colorScheme.forCart();
   }
 
   createUserOrder() {
@@ -156,28 +159,38 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
     const url = `http://localhost:3000/users/${id}`;
-    this.http.get<IUser>(url, { headers }).subscribe((user: IUser) => {
-      const orders = user.orders;
-      const userOrder = {
-        ...this.order,
-        flightDetailsDeparture: this.flightDetailsDeparture,
-        passengersDetailsDeparture: this.passengersDetailsDeparture,
-        flightDetailsDestination: this.flightDetailsDestination,
-        passengersDetailsDestination: this.passengersDetailsDestination,
-        costTrip: this.costTrip,
-      };
-      if (orders) {
-        orders.push(userOrder);
-        this.http.patch(url, { orders }, { headers }).subscribe((newUser) => {
-          console.log(newUser);
-        });
-      } else {
-        this.http
-          .patch(url, { orders: [userOrder] }, { headers })
-          .subscribe((newUser) => {
-            console.log(newUser);
+    this.http
+      .get<IUser>(url, { headers })
+      .pipe(
+        catchError((error) => {
+          if (error.statusText === 'Unauthorized') {
+            this.auth.logOut();
+          }
+          return of();
+        })
+      )
+      .subscribe((user: IUser) => {
+        const orders = user.orders;
+        const userOrder = {
+          ...this.order,
+          flightDetailsDeparture: this.flightDetailsDeparture,
+          passengersDetailsDeparture: this.passengersDetailsDeparture,
+          flightDetailsDestination: this.flightDetailsDestination,
+          passengersDetailsDestination: this.passengersDetailsDestination,
+          costTrip: this.costTrip,
+        };
+        if (orders) {
+          orders.push(userOrder);
+          this.http.patch(url, { orders }, { headers }).subscribe(() => {
+            this.store.dispatch(initialUserOrders());
           });
-      }
-    });
+        } else {
+          this.http
+            .patch(url, { orders: [userOrder] }, { headers })
+            .subscribe(() => {
+              this.store.dispatch(initialUserOrders());
+            });
+        }
+      });
   }
 }

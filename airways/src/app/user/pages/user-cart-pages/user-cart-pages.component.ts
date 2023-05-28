@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { IOrder } from 'app/booking/models/flightDetails.model';
+import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 import { FormatParamService } from 'app/core/services/format-param.service';
 import { initialUserOrders } from 'app/redux/actions/orders.actions';
 import { userOrders } from 'app/redux/selectors/flights.selectors';
@@ -19,7 +20,13 @@ export class UserCartPagesComponent implements OnInit {
 
   orderSelected: number[] = [];
 
-  constructor(private store: Store, public format: FormatParamService) {}
+  constructor(
+    private store: Store,
+    public format: FormatParamService,
+    private colorScheme: ColorSchemeService
+  ) {
+    this.colorScheme.forCart();
+  }
 
   ngOnInit(): void {
     this.store.dispatch(initialUserOrders());

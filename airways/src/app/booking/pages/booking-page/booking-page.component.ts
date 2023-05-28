@@ -138,7 +138,6 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   submit() {
     // if (this.passengersForm.valid) {
     const formValue: IPassengersForm = this.passengersForm.getRawValue();
-    console.log(formValue);
     this.store.dispatch(savePassengersForm({ passengersForm: formValue }));
     this.router.navigateByUrl('booking/summary');
     // }
@@ -153,7 +152,6 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   }
 
   parsePassengers(arr: string[]) {
-    console.log(arr);
 
     const passengers: string[] = [];
     arr.forEach((passenger) => {

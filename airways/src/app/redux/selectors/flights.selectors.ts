@@ -166,3 +166,8 @@ export const ordersStorage = createSelector(
   selectFlightsState,
   (state) => state.orders
 );
+
+export const ordersCount = createSelector(
+  selectFlightsState,
+  (state) => state.orders.length || 0
+);

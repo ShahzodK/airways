@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -20,6 +21,7 @@ import {
   passengersDetailsDestination,
   selectPassengers,
 } from 'app/redux/selectors/flights.selectors';
+import { IUser } from 'app/user/model/user.interface';
 import { AuthService } from 'app/user/services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -64,7 +66,8 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     private router: Router,
     private colorScheme: ColorSchemeService,
     public format: FormatParamService,
-    private auth: AuthService
+    private auth: AuthService,
+    private http: HttpClient
   ) {
     this.colorScheme.changeSchemeFalse();
     this.colorScheme.forPageSummary();
@@ -122,7 +125,7 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
   buyNow() {
     if (this.auth.isUserLoggedIn()) {
       this.createUserOrder();
-      this.router.navigateByUrl('/search');
+      // this.router.navigateByUrl('/search');
       this.colorScheme.changeSchemeTrue();
     } else {
       this.router.navigateByUrl('/search');
@@ -146,6 +149,26 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
   }
 
   createUserOrder() {
-    //отправить на бек заказ
+    const id = localStorage.getItem('userAirwaysId');
+    const token = localStorage.getItem('userAirwaysToken') ?? '';
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+    const url = `http://localhost:3000/users/${id}`;
+    this.http.get<IUser>(url, { headers }).subscribe((user: IUser) => {
+      const orders = user.orders;
+      if (orders) {
+        orders.push(this.order);
+        this.http.patch(url, { orders }, { headers }).subscribe((newUser) => {
+          console.log(newUser);
+        });
+      } else {
+        this.http
+          .patch(url, { orders: [this.order] }, { headers })
+          .subscribe((newUser) => {
+            console.log(newUser);
+          });
+      }
+    });
   }
 }

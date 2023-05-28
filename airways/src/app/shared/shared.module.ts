@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -24,7 +25,7 @@ import { TableRowComponent } from './components/table-row/table-row.component';
 
 @NgModule({
   declarations: [TableHeaderComponent, TableRowComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, MatMenuModule, MatButtonModule],
   exports: [
     MatButtonModule,
     MatIconModule,
@@ -41,12 +42,12 @@ import { TableRowComponent } from './components/table-row/table-row.component';
     MatNativeDateModule,
     MatSelectModule,
     MatTabsModule,
-    MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
     MatSlideToggleModule,
     HttpClientModule,
     TableHeaderComponent,
+    MatBadgeModule,
   ],
   providers: [MatDatepickerModule],
 })

@@ -13,4 +13,5 @@ export interface IFlightsState {
   searchForm: ISearchForm;
   passengersForm: IPassengersForm;
   selectedTickets: { departure: ITicket; destination?: ITicket };
+  userOrders?: IOrder[];
 }

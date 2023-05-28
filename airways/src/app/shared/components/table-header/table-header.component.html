@@ -8,9 +8,13 @@
 </div>
 
 <div class="block-table-body">
-  <ng-container *ngFor="let order of orders">
+  <ng-container *ngFor="let order of orders; let i = index">
     <div class="block-table-row">
-      <input type="checkbox" class="order-checkbox" />
+      <input
+        type="checkbox"
+        class="order-checkbox"
+        (change)="selectOrder($event, i)"
+      />
       <div class="block-row-order">
         <p class="row-number">{{ order.number }}</p>
         <div class="row-flights">
@@ -41,9 +45,25 @@
         </div>
         <p class="row-price">
           {{
-            order.price | currency : format.currency : "symbol-narrow" : "1.2-2"
+            order.price * format.getIndex()
+              | currency : format.currency : "symbol-narrow" : "1.2-2"
           }}
         </p>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span (click)="deleteOrder(i)">Delete</span>
+          </button>
+          <button mat-menu-item>
+            <span>Edit</span>
+          </button>
+        </mat-menu>
       </div>
     </div>
   </ng-container>

@@ -10,6 +10,7 @@ import { LoginSocialNetworkComponent } from './components/login-social-network/l
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthPagesComponent } from './pages/auth-pages/auth-pages.component';
 import { UserCartPagesComponent } from './pages/user-cart-pages/user-cart-pages.component';
+import { BookingRoutingModule } from './user.routing.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserCartPagesComponent } from './pages/user-cart-pages/user-cart-pages.
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    BookingRoutingModule,
   ],
   exports: [AuthPagesComponent],
 })

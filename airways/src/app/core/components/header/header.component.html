@@ -39,7 +39,13 @@
           <p class="button-text">{{ userName }}</p>
         </button>
       </div>
-      <div class="basket"></div>
+      <div
+        [matBadge]="ordersCount$ | async"
+        [matBadgeHidden]="(ordersCount$ | async) === 0"
+        matBadgeColor="warn"
+        class="basket"
+        (click)="navigationByCart()"
+      ></div>
     </div>
 
     <ng-template #blockDark>
@@ -68,7 +74,13 @@
             <p class="button-text">Sign in</p>
           </button>
         </div>
-        <div class="basket"></div>
+        <div
+          [matBadge]="ordersCount$ | async"
+          [matBadgeHidden]="(ordersCount$ | async) === 0"
+          matBadgeColor="warn"
+          (click)="navigationByCart()"
+          class="basket"
+        ></div>
       </div>
     </ng-template>
   </header>

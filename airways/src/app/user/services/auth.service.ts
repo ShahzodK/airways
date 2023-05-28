@@ -23,8 +23,6 @@ export class AuthService {
 
   isBadRequest = false;
 
-  userId!: string;
-
   isChangeHeightMain = false;
 
   constructor(private http: HttpClient) {
@@ -61,7 +59,7 @@ export class AuthService {
         if (newUser) {
           localStorage.setItem('userAirwaysToken', newUser.accessToken);
           localStorage.setItem('userAirwaysName', newUser.user.firstName);
-          this.userId = newUser.user.id.toString();
+          localStorage.setItem('userAirwaysId', newUser.user.id.toString());
           this.userName$.next(newUser.user.firstName);
           this.isLoginPageVisible$.next(false);
           this.isBadRequest = false;
@@ -76,7 +74,7 @@ export class AuthService {
     this.http.post<UserResponse>(url, user).subscribe((newUser) => {
       localStorage.setItem('userAirwaysToken', newUser.accessToken);
       localStorage.setItem('userAirwaysName', newUser.user.firstName);
-      this.userId = newUser.user.id.toString();
+      localStorage.setItem('userAirwaysId', newUser.user.id.toString());
       this.userName$.next(newUser.user.firstName);
     });
   }

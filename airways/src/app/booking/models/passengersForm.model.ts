@@ -10,7 +10,7 @@ interface IPassengersContacts {
   cardNumber: string;
 }
 
-interface IPassenger {
+export interface IPassenger {
   firstName: string;
   lastName: string;
   gender: string;

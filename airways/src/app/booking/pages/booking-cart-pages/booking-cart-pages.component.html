@@ -1,9 +1,8 @@
 <div class="cart-wrapper">
-  <div class="user-cart-container">
-    <p class="user-cart-title">User Account</p>
+  <div class="cart-container">
+    <p class="cart-title">Cart</p>
     <ng-container *ngIf="orders$ | async as orders">
       <app-table-header
-        [visibilitySelection]="true"
         [orders]="orders"
         (sendSelect)="selectOrder($event)"
       ></app-table-header>
@@ -17,6 +16,16 @@
                 | currency : format.currency : "symbol-narrow" : "1.2-2"
             }}
           </p>
+        </div>
+      </div>
+      <div class="block-cart-payment">
+        <mat-form-field class="example-full-width">
+          <span matPrefix class="promo-prefix">APPLY</span>
+          <input type="tel" matInput placeholder="Promo Code" />
+        </mat-form-field>
+        <div class="block-payment-button">
+          <p class="selected-order">{{ countSelected }} selected</p>
+          <button class="button-payment" (click)="payOrder()">Payment</button>
         </div>
       </div>
     </ng-container>

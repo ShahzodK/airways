@@ -194,7 +194,6 @@ export class TicketSelectionComponent implements OnInit  {
     if(this.selectedDestinationTicket) {
       let totalPassengers = +this.selectedDepartureTicket.passengers[0][0] + +this.selectedDepartureTicket.passengers[1][0];
       for (let i = 1; i <= totalPassengers; i++) {
-        console.log(this.flightDates.departures)
         let row = this.flightDates.departures[0].rows[Math.floor((i - 1) / this.flightDates.departures[0].columns)];
         let column = (i - 1) % this.flightDates.departures[0].columns + 1;
         let seat_number = column + row;

@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
+import { FormatParamService } from 'app/core/services/format-param.service';
+import { ordersCount } from 'app/redux/selectors/flights.selectors';
 import { AuthService } from 'app/user/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -19,10 +22,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isColorScheme!: boolean;
 
+  ordersCount$!: Observable<number>;
+
   constructor(
     public authService: AuthService,
     public colorScheme: ColorSchemeService,
-    private router: Router
+    public format: FormatParamService,
+    private router: Router,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +42,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptionOnUserName = this.authService.userName.subscribe(
       (name) => (this.userName = name)
     );
+
+    this.ordersCount$ = this.store.select(ordersCount);
   }
 
   ngOnDestroy(): void {
@@ -50,15 +59,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       } else {
         this.authService.isLoginPageVisible$.next(true);
       }
-      // console.log(this.authService.isLoginPageVisible$.getValue());
-      // this.authService.isLoginPageVisible$.next(true);
+    } else {
+      this.router.navigateByUrl('/user-account');
     }
   }
 
   redirectToSearch() {
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');
-      this.colorScheme.changeScheme();
+      this.colorScheme.forPageMain();
     }
+  }
+
+  navigationByCart() {
+    this.router.navigateByUrl('/booking/cart');
   }
 }

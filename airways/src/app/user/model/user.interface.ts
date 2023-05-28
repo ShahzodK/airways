@@ -1,3 +1,5 @@
+import { IOrder } from 'app/booking/models/flightDetails.model';
+
 export interface UserLogin {
   email: string | null;
   password: string | null;
@@ -5,18 +7,21 @@ export interface UserLogin {
 
 export interface UserResponse {
   accessToken: string;
-  user: {
-    id: number;
-    email: string;
-    firstName: string;
-    lastName: string;
-    dateOfBirth: string;
-    gender: string;
-    country: string;
-    phone: string;
-    citizenship: string;
-    assent: boolean;
-  };
+  user: IUser;
+}
+
+export interface IUser {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  country: string;
+  phone: string;
+  citizenship: string;
+  assent: boolean;
+  orders?: IOrder[];
 }
 
 export interface UserCreate {

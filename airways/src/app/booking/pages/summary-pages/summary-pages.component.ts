@@ -149,6 +149,7 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
   }
 
   createUserOrder() {
+    this.order.price = this.getTotalCost(this.costTrip);
     const id = localStorage.getItem('userAirwaysId');
     const token = localStorage.getItem('userAirwaysToken') ?? '';
     const headers = new HttpHeaders()
@@ -157,14 +158,22 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     const url = `http://localhost:3000/users/${id}`;
     this.http.get<IUser>(url, { headers }).subscribe((user: IUser) => {
       const orders = user.orders;
+      const userOrder = {
+        ...this.order,
+        flightDetailsDeparture: this.flightDetailsDeparture,
+        passengersDetailsDeparture: this.passengersDetailsDeparture,
+        flightDetailsDestination: this.flightDetailsDestination,
+        passengersDetailsDestination: this.passengersDetailsDestination,
+        costTrip: this.costTrip,
+      };
       if (orders) {
-        orders.push(this.order);
+        orders.push(userOrder);
         this.http.patch(url, { orders }, { headers }).subscribe((newUser) => {
           console.log(newUser);
         });
       } else {
         this.http
-          .patch(url, { orders: [this.order] }, { headers })
+          .patch(url, { orders: [userOrder] }, { headers })
           .subscribe((newUser) => {
             console.log(newUser);
           });

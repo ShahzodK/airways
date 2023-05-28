@@ -34,4 +34,9 @@ export interface IOrder {
     Infants: string;
   };
   price: number;
+  flightDetailsDeparture?: IFlightDetails;
+  passengersDetailsDeparture?: IPassengersDetails[];
+  flightDetailsDestination?: IFlightDetails | null;
+  passengersDetailsDestination?: IPassengersDetails[] | null;
+  costTrip?: ICostTrip[];
 }

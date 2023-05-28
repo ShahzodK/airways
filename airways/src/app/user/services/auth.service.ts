@@ -25,6 +25,10 @@ export class AuthService {
 
   isChangeHeightMain = false;
 
+  selected = {
+    oder: 0,
+  };
+
   constructor(private http: HttpClient) {
     this.userName = this.userName$.asObservable();
     this.isLogged = this.isLogged$.asObservable();

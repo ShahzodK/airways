@@ -20,11 +20,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { OrderCardComponent } from './components/order-card/order-card.component';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
 
 @NgModule({
-  declarations: [TableHeaderComponent, TableRowComponent],
+  declarations: [TableHeaderComponent, TableRowComponent, OrderCardComponent],
   imports: [CommonModule, MatIconModule, MatMenuModule, MatButtonModule],
   exports: [
     MatButtonModule,
@@ -47,6 +48,7 @@ import { TableRowComponent } from './components/table-row/table-row.component';
     MatSlideToggleModule,
     HttpClientModule,
     TableHeaderComponent,
+    OrderCardComponent,
     MatBadgeModule,
   ],
   providers: [MatDatepickerModule],

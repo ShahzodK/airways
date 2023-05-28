@@ -9,6 +9,7 @@ import { MainService } from './../../services/main.service';
 import { selectFlightsName, selectSearchFlight } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { sendSearchForm } from './../../../redux/actions/flights.actions';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-main-page',
@@ -56,7 +57,8 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(
     public mainService: MainService,
     public store: Store,
-    public router: Router
+    public router: Router,
+    public datePipe: DatePipe
   ) {}
 
   public searchForm = new FormGroup({

@@ -4,8 +4,8 @@
     <img src="../../../../assets/return-trip.svg" alt="return icon"> {{searchForm.destination}}
   </p>
   <p class="flight-info-date" *ngIf="searchForm.tripType == '1'">
-    {{searchForm.start!.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}} -
-    {{searchForm.end!.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
+    {{searchForm.start!.toString().slice(0,11)}} -
+    {{searchForm.end!.toString().slice(0,11)}}</p>
   <p class="flight-info-passengers">{{mainService.getPassengersCount()}}
   </p>
   <button class="flight-info-edit-btn">edit</button>

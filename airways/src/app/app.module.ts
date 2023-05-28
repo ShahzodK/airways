@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { FlightsEffects } from './redux/effects/flights.effects';
 import { flightsReducer } from './redux/reducers/flights.reducer';
 import { UserModule } from './user/user.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,7 @@ import { UserModule } from './user/user.module';
     EffectsModule.forRoot([FlightsEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

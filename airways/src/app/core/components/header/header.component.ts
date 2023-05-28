@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
+import { MY_FORMATS } from 'app/search/consts/my_date';
 import { AuthService } from 'app/user/services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -60,5 +61,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('search');
       this.colorScheme.changeScheme();
     }
+  }
+
+  public changeDateFormat(format: string) {
+    MY_FORMATS.display.dateInput = format
   }
 }

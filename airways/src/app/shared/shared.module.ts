@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -19,9 +20,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { OrderCardComponent } from './components/order-card/order-card.component';
+import { TableHeaderComponent } from './components/table-header/table-header.component';
+import { TableRowComponent } from './components/table-row/table-row.component';
+
 @NgModule({
-  declarations: [],
-  imports: [CommonModule],
+  declarations: [TableHeaderComponent, TableRowComponent, OrderCardComponent],
+  imports: [CommonModule, MatIconModule, MatMenuModule, MatButtonModule],
   exports: [
     MatButtonModule,
     MatIconModule,
@@ -38,11 +43,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatNativeDateModule,
     MatSelectModule,
     MatTabsModule,
-    MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
     MatSlideToggleModule,
     HttpClientModule,
+    TableHeaderComponent,
+    OrderCardComponent,
+    MatBadgeModule,
   ],
   providers: [MatDatepickerModule],
 })

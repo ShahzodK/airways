@@ -9,7 +9,7 @@
   overflow: auto;
 }
 
-.user-cart-container {
+.cart-container {
   width: 1128px;
 
   ::ng-deep {
@@ -32,7 +32,7 @@
   }
 }
 
-.user-cart-title {
+.cart-title {
   padding: 33px 0 27px 31px;
   font-weight: 700;
   font-size: 24px;
@@ -87,4 +87,38 @@
   line-height: 20px;
   letter-spacing: 0.1px;
   color: #11397e;
+}
+
+.block-cart-payment {
+  padding: 40px 34px 40px 28px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.block-payment-button {
+  display: flex;
+  gap: 38px;
+  align-items: center;
+
+  .button-payment {
+    width: 126px;
+    height: 60px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    background: #11397e;
+    border-radius: 4px;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .selected-order {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #74767a;
+  }
 }

@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  width: 551px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  .passengers-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .passenger-card {
+    background-color: white;
+    padding: 20px 24px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    color: #000000;
+  }
+
+  .passenger-name {
+    text-transform: uppercase;
+  }
+
+  .block-passenger-details {
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.block-order-details {
+  background: #f1f3f6;
+  padding: 22px 24px;
+  border-top: 3px solid #11397e;
+  border-radius: 8px 8px 0px 0px;
+
+  .flight-name {
+    display: flex;
+    gap: 20px;
+    color: #000000;
+    letter-spacing: 0.5px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+
+  .flight-timestamp {
+    display: flex;
+    gap: 36px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .flight-number {
+    color: #11397e;
+  }
+}

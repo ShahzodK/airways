@@ -10,6 +10,7 @@ import { selectFlightsName, selectSearchFlight } from 'app/redux/selectors/fligh
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { sendSearchForm } from './../../../redux/actions/flights.actions';
 import { DatePipe } from '@angular/common';
+import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 
 @Component({
   selector: 'app-main-page',
@@ -59,6 +60,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
     public store: Store,
     public router: Router,
     public datePipe: DatePipe
+    private colorScheme: ColorSchemeService
   ) {}
 
   public searchForm = new FormGroup({
@@ -107,6 +109,7 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
             this.router.navigate(['booking/tickets']);
           }
         })
+        this.colorScheme.forPageTickets();
       }, 100);
     }
   }

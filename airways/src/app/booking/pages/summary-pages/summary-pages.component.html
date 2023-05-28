@@ -2,3 +2,67 @@
   <img src="../../../../assets/preview.svg" class="preview-img" />
   <p class="preview-text">Summary</p>
 </div>
+
+<div class="block-orders">
+  <app-order-card
+    [flightDetails]="flightDetailsDeparture"
+    [passengersDetails]="passengersDetailsDeparture"
+  ></app-order-card>
+
+  <ng-container *ngIf="flightDetailsDestination">
+    <ng-container *ngIf="passengersDetailsDestination">
+      <app-order-card
+        [flightDetails]="flightDetailsDestination"
+        [passengersDetails]="passengersDetailsDestination"
+      ></app-order-card>
+    </ng-container>
+  </ng-container>
+</div>
+
+<div class="block-orders-cost">
+  <ng-container *ngFor="let cost of costTrip">
+    <div class="container-orders-cost">
+      <div class="block-cost-total">
+        <p>{{ cost.count }} x {{ cost.type }} Fare</p>
+        <p>
+          {{
+            cost.total | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
+      <div class="block-cost-fare">
+        <p>Fare</p>
+        <p>
+          {{
+            cost.fare | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
+      <div class="block-cost-tax">
+        <p>Tax & Service Charge</p>
+        <p>
+          {{
+            cost.tax | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+  <div class="order-cost">
+    <p>Total:</p>
+    <p>
+      {{
+        getTotalCost(costTrip) * format.getIndex()
+          | currency : format.currency : "symbol-narrow" : "1.2-2"
+      }}
+    </p>
+  </div>
+</div>
+
+<div class="button-block">
+  <button class="button-back button" (click)="toBack()">Back</button>
+  <button class="button-add button" (click)="addToCart()">
+    Add to order cart
+  </button>
+  <button class="button-buy button" (click)="buyNow()">Buy now</button>
+</div>

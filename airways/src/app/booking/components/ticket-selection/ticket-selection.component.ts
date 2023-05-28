@@ -6,7 +6,7 @@ import { ITicket } from 'app/booking/models/ticket.model';
 import { selectSearchFlight, selectSearchForm } from 'app/redux/selectors/flights.selectors';
 import { IDate } from 'app/shared/models/date.model';
 import { saveSelectedTickets } from 'app/redux/actions/flights.actions';
-import { AuthService } from 'app/user/services/auth.service';
+import { FormatParamService } from 'app/core/services/format-param.service';
 
 @Component({
   selector: 'app-ticket-selection',
@@ -20,7 +20,7 @@ export class TicketSelectionComponent implements OnInit  {
               private elementRef: ElementRef,
               private renderer: Renderer2,
               private router: Router,
-              public authService: AuthService
+              public formatParamService: FormatParamService
               ) {}
 
   public searchFlight$ = this.store.select(selectSearchFlight);

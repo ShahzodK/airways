@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { IPassengersForm } from 'app/booking/models/passengersForm.model';
+import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 import { savePassengersForm } from 'app/redux/actions/passengers.actions';
 import { dateValidator } from 'app/user/validators/date.validator';
 import { Subscription } from 'rxjs';
@@ -35,7 +36,10 @@ export class BookingPageComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private store: Store,
     private router: Router,
+    private colorScheme: ColorSchemeService
   ) {
+    this.colorScheme.forPageBooking();
+
     this.passengersForm = this.fb.group({
       passengers: this.fb.array([]),
       contacts: this.fb.group({
@@ -140,6 +144,7 @@ export class BookingPageComponent implements OnInit, OnDestroy {
     const formValue: IPassengersForm = this.passengersForm.getRawValue();
     this.store.dispatch(savePassengersForm({ passengersForm: formValue }));
     this.router.navigateByUrl('booking/summary');
+    this.colorScheme.forPageSummary();
     // }
   }
 
@@ -152,7 +157,6 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   }
 
   parsePassengers(arr: string[]) {
-
     const passengers: string[] = [];
     arr.forEach((passenger) => {
       const [count, type] = passenger.split(' ');
@@ -165,5 +169,10 @@ export class BookingPageComponent implements OnInit, OnDestroy {
       this.addPassengers();
       this.passengersArray.push(elem);
     });
+  }
+
+  toBack() {
+    this.router.navigateByUrl('/booking/tickets');
+    this.colorScheme.forPageTickets();
   }
 }

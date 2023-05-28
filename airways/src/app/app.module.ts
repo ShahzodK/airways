@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { FlightsEffects } from './redux/effects/flights.effects';
+import { UserOrdersEffects } from './redux/effects/user-oders.effects';
 import { flightsReducer } from './redux/reducers/flights.reducer';
 import { UserModule } from './user/user.module';
 import { DatePipe } from '@angular/common';
@@ -22,7 +23,7 @@ import { DatePipe } from '@angular/common';
     CoreModule,
     UserModule,
     StoreModule.forRoot({ app: flightsReducer }),
-    EffectsModule.forRoot([FlightsEffects]),
+    EffectsModule.forRoot([FlightsEffects, UserOrdersEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
   ],
   providers: [DatePipe],

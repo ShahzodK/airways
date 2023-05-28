@@ -21,15 +21,13 @@ export class AuthService {
 
   isLoginPageVisible: Observable<boolean>;
 
-  defaultDateFormat = 'MDY';
-
-  defaultCurrency = 'EUR';
-
   isBadRequest = false;
 
-  userId!: string;
-
   isChangeHeightMain = false;
+
+  selected = {
+    oder: 0,
+  };
 
   constructor(private http: HttpClient) {
     this.userName = this.userName$.asObservable();
@@ -65,7 +63,7 @@ export class AuthService {
         if (newUser) {
           localStorage.setItem('userAirwaysToken', newUser.accessToken);
           localStorage.setItem('userAirwaysName', newUser.user.firstName);
-          this.userId = newUser.user.id.toString();
+          localStorage.setItem('userAirwaysId', newUser.user.id.toString());
           this.userName$.next(newUser.user.firstName);
           this.isLoginPageVisible$.next(false);
           this.isBadRequest = false;
@@ -80,8 +78,16 @@ export class AuthService {
     this.http.post<UserResponse>(url, user).subscribe((newUser) => {
       localStorage.setItem('userAirwaysToken', newUser.accessToken);
       localStorage.setItem('userAirwaysName', newUser.user.firstName);
-      this.userId = newUser.user.id.toString();
+      localStorage.setItem('userAirwaysId', newUser.user.id.toString());
       this.userName$.next(newUser.user.firstName);
     });
+  }
+
+  logOut() {
+    localStorage.removeItem('userAirwaysToken');
+    localStorage.removeItem('userAirwaysName');
+    localStorage.removeItem('userAirwaysId');
+    this.userName$.next('Sign in');
+    this.isLoginPageVisible$.next(true);
   }
 }

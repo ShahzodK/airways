@@ -6,7 +6,7 @@
 
   <div class="flight-info flight-info-departure">
     <mat-tab-group>
-      <mat-tab *ngFor="let departures of flightDates.departures; index as i">
+      <mat-tab *ngFor="let departures of flightDates.departures; index as i" class="tab-dates">
         <ng-template mat-tab-label>
           <div class="tab-label-content">
             <p class="date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>

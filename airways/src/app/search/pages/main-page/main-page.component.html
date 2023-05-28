@@ -21,6 +21,7 @@
                  [matAutocomplete]="destinationAuto"
                  class="search-form-trip-location-destination search-form-trip-location-input">
                  <span class="destination input-text">Destination</span>
+                 <p *ngIf="searchForm.get('destination')!.hasError('noFlights')" class="no-flights"> Route not found, please choose another route(e.g Dublin-Dubai)</p>
           <mat-autocomplete #departureAuto="matAutocomplete">
             <mat-option *ngFor="let departure of departures" [value]="departure">{{departure}}</mat-option>
           </mat-autocomplete>

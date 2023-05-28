@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import * as FlightsActions from '../../../redux/actions/flights.actions'
 import { MainService } from './../../services/main.service';
-import { selectFlightsName } from 'app/redux/selectors/flights.selectors';
+import { selectFlightsName, selectSearchFlight } from 'app/redux/selectors/flights.selectors';
 import { ISearchForm } from 'app/search/models/searchForm.model';
 import { sendSearchForm } from './../../../redux/actions/flights.actions';
 
@@ -92,7 +92,19 @@ export class MainPageComponent implements AfterViewInit, OnInit, OnDestroy {
       formValue.passengers = this.mainService.passengers.map(item => item.trim());
       this.store.dispatch(sendSearchForm({flight: formValue}));
       setTimeout(() => {
-        this.router.navigate(['booking/tickets']);
+        this.store.select(selectSearchFlight).subscribe(x => {
+          if(x.length == 0) {
+            this.searchForm.controls.destination.setErrors({
+              noFlights: true
+            });          
+          }
+          else {
+            this.mainService.adultCount = 0;
+            this.mainService.childCount = 0;
+            this.mainService.infantCount = 0;
+            this.router.navigate(['booking/tickets']);
+          }
+        })
       }, 100);
     }
   }

@@ -10,7 +10,7 @@ import { BookingPassengersComponent } from './components/booking-passengers/book
 import { BookingPageComponent } from './pages/booking-page/booking-page.component';
 import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.component';
 import { BookingTicketPageComponent } from 'app/booking/pages/booking-ticket-page/booking-ticket-page.component';
-import { FlightInfoComponent } from './components/flight-info/flight-info.component';
+import { FlightInfoComponent } from '../shared/components/flight-info/flight-info.component';
 import { TicketSelectionComponent } from './components/ticket-selection/ticket-selection.component';
 
 @NgModule({

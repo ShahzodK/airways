@@ -16,16 +16,25 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { OrderCardComponent } from './components/order-card/order-card.component';
+import { PopUpAuthComponent } from './components/pop-up-auth/pop-up-auth.component';
+import { PopUpComponent } from './components/pop-up/pop-up.component';
 import { TableHeaderComponent } from './components/table-header/table-header.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
 
 @NgModule({
-  declarations: [TableHeaderComponent, TableRowComponent, OrderCardComponent],
+  declarations: [
+    TableHeaderComponent,
+    TableRowComponent,
+    OrderCardComponent,
+    PopUpComponent,
+    PopUpAuthComponent,
+  ],
   imports: [CommonModule, MatIconModule, MatMenuModule, MatButtonModule],
   exports: [
     MatButtonModule,
@@ -50,7 +59,8 @@ import { TableRowComponent } from './components/table-row/table-row.component';
     TableHeaderComponent,
     OrderCardComponent,
     MatBadgeModule,
+    MatSnackBarModule,
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, PopUpComponent, PopUpAuthComponent],
 })
 export class SharedModule {}

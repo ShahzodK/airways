@@ -40,8 +40,8 @@ export const flightDetailsDestination = createSelector(
   selectFlightsState,
   (state) => {
     if (
-      state.selectedTickets.destination
-      // && state.selectedTickets.destination.duration
+      state.selectedTickets.destination &&
+      state.selectedTickets.destination.duration
     ) {
       return {
         number: state.selectedTickets.destination.flight_no,
@@ -175,4 +175,9 @@ export const ordersCount = createSelector(
 export const userOrders = createSelector(
   selectFlightsState,
   (state) => state.userOrders ?? []
+);
+
+export const isNotEmptyRequest = createSelector(
+  selectFlightsState,
+  (state) => state.flight.length !== 0
 );

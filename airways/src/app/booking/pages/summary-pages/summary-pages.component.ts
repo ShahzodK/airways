@@ -24,6 +24,7 @@ import {
   passengersDetailsDestination,
   selectPassengers,
 } from 'app/redux/selectors/flights.selectors';
+import { PopUpComponent } from 'app/shared/components/pop-up/pop-up.component';
 import { IUser } from 'app/user/model/user.interface';
 import { AuthService } from 'app/user/services/auth.service';
 import { catchError, of, Subscription } from 'rxjs';
@@ -70,7 +71,8 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     private colorScheme: ColorSchemeService,
     public format: FormatParamService,
     private auth: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private popUp: PopUpComponent
   ) {
     this.colorScheme.forPageSummary();
   }
@@ -133,6 +135,7 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/search');
       this.colorScheme.forPageMain();
     }
+    this.popUp.showPopUp();
   }
 
   addToCart() {

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthRedirectionGuard } from './core/guards/auth-redirection.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +23,7 @@ const routes: Routes = [
     path: 'user-account',
     loadChildren: () =>
       import('./user/user.module').then((mod) => mod.UserModule),
+    canActivate: [AuthRedirectionGuard],
   },
 ];
 

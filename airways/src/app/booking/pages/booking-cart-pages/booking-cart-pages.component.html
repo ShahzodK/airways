@@ -7,7 +7,9 @@
         (sendSelect)="selectOrder($event)"
       ></app-table-header>
       <div class="block-cart-result">
-        <p class="cart-add-trip">+ Add new trip</p>
+        <p class="cart-add-trip" (click)="redirectionBySearch()">
+          + Add new trip
+        </p>
         <div class="block-cart-total-cost">
           <p class="cost-title">Total:</p>
           <p class="cost-number">

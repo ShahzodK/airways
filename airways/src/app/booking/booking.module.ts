@@ -16,8 +16,6 @@ import { SummaryPagesComponent } from './pages/summary-pages/summary-pages.compo
 
 @NgModule({
   declarations: [
-    BookingCardComponent,
-    BookingPassengersComponent,
     BookingPageComponent,
     SummaryPagesComponent,
     BookingTicketPageComponent,

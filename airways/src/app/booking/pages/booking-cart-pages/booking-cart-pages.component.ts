@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { IOrder } from 'app/booking/models/flightDetails.model';
@@ -6,6 +7,7 @@ import { ColorSchemeService } from 'app/core/services/color-scheme.service';
 import { FormatParamService } from 'app/core/services/format-param.service';
 import { saveOrders } from 'app/redux/actions/orders.actions';
 import { ordersStorage } from 'app/redux/selectors/flights.selectors';
+import { PopUpComponent } from 'app/shared/components/pop-up/pop-up.component';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,9 +25,11 @@ export class BookingCartPagesComponent implements OnInit {
   constructor(
     private colorScheme: ColorSchemeService,
     private store: Store,
-    public format: FormatParamService
+    public format: FormatParamService,
+    private popUp: PopUpComponent,
+    private router: Router
   ) {
-    this.colorScheme.changeSchemeFalse();
+    this.colorScheme.forCart();
   }
 
   ngOnInit(): void {
@@ -60,5 +64,11 @@ export class BookingCartPagesComponent implements OnInit {
       this.orderSelected = [];
       this.countSelected = 0;
     }
+    this.popUp.showPopUp();
+  }
+
+  redirectionBySearch() {
+    this.router.navigateByUrl('/search');
+    this.colorScheme.forPageMain();
   }
 }

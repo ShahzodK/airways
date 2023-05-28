@@ -140,12 +140,12 @@ export class BookingPageComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    // if (this.passengersForm.valid) {
-    const formValue: IPassengersForm = this.passengersForm.getRawValue();
-    this.store.dispatch(savePassengersForm({ passengersForm: formValue }));
-    this.router.navigateByUrl('booking/summary');
-    this.colorScheme.forPageSummary();
-    // }
+    if (this.passengersForm.valid) {
+      const formValue: IPassengersForm = this.passengersForm.getRawValue();
+      this.store.dispatch(savePassengersForm({ passengersForm: formValue }));
+      this.router.navigateByUrl('booking/summary');
+      this.colorScheme.forPageSummary();
+    }
   }
 
   isDateValid(count: number): ValidationErrors | null {

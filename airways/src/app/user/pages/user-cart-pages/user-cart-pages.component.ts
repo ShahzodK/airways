@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { IOrder } from 'app/booking/models/flightDetails.model';
@@ -23,7 +24,8 @@ export class UserCartPagesComponent implements OnInit {
   constructor(
     private store: Store,
     public format: FormatParamService,
-    private colorScheme: ColorSchemeService
+    private colorScheme: ColorSchemeService,
+    private router: Router
   ) {
     this.colorScheme.forCart();
   }
@@ -47,5 +49,10 @@ export class UserCartPagesComponent implements OnInit {
         (_, i) => i !== event.index
       );
     }
+  }
+
+  redirectionBySearch() {
+    this.router.navigateByUrl('/search');
+    this.colorScheme.forPageMain();
   }
 }

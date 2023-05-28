@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { ICostTrip, IOrder } from 'app/booking/models/flightDetails.model';
@@ -21,7 +22,8 @@ export class OrderSummaryComponent implements OnInit {
     private store: Store,
     public auth: AuthService,
     public format: FormatParamService,
-    private colorScheme: ColorSchemeService
+    private colorScheme: ColorSchemeService,
+    private router: Router
   ) {
     this.colorScheme.forCart();
   }
@@ -33,5 +35,10 @@ export class OrderSummaryComponent implements OnInit {
 
   getTotalCost(arr: ICostTrip[]) {
     return arr.reduce((ac, el) => ac + el.total, 0);
+  }
+
+  returnToAccount() {
+    this.router.navigateByUrl('/user-account');
+    this.colorScheme.forCart();
   }
 }

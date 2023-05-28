@@ -6,12 +6,12 @@
 
   <div class="flight-info flight-info-departure">
     <mat-tab-group>
-      <mat-tab *ngFor="let departures of flightDates.departures; index as i">
+      <mat-tab *ngFor="let departures of flightDates.departures; index as i" class="tab-dates">
         <ng-template mat-tab-label>
           <div class="tab-label-content">
             <p class="date">{{departures.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
             <p class="weekday">{{departures.date.toLocaleDateString('en-US', {weekday: 'long'})}}</p>
-            <p class="price">{{departures.price}}</p>
+            <p class="price" *ngIf="departures.price > 0">{{departures.price | currency: formatParamService.currency}}</p>
           </div>
         </ng-template>
         <div class="flight-info-ticket" *ngIf="!!departures.price && departures.price != ' '">
@@ -35,8 +35,8 @@
             <span class="divider"></span>
             <p class="flight-info-ticket-seats">{{searchFlight[0].seats_amount}} seats<br> available</p>
             <p class="flight-info-ticket-price-name">price</p>
-            <p class="flight-info-ticket-price">{{departures.price}}</p>
-          </div>
+            <p class="price" *ngIf="departures.price > 0">{{departures.price | currency: formatParamService.currency}}</p>
+            </div>
             <button *ngIf="!isDepartureTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('departure', 'select', departures)">Select</button>
             <button *ngIf="isDepartureTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('departure', 'edit')">Edit</button>
         </div>
@@ -55,7 +55,7 @@
           <div class="tab-label-content">
             <p class="date">{{destinations.date.toLocaleDateString('en-US', {day: 'numeric', month: 'long'})}}</p>
             <p class="weekday">{{destinations.date.toLocaleDateString('en-US', {weekday: 'long'})}}</p>
-            <p class="price">{{destinations.price}}</p>
+            <p class="price" *ngIf="destinations.price > 0">{{destinations.price | currency: formatParamService.currency}}</p>
           </div>
         </ng-template>
         <div class="flight-info-ticket" *ngIf="!!destinations.price && destinations.price != ' '">
@@ -79,7 +79,7 @@
             <span class="divider"></span>
             <p class="flight-info-ticket-seats">{{searchFlight[1].seats_amount}} seats<br> available</p>
             <p class="flight-info-ticket-price-name">price</p>
-            <p class="flight-info-ticket-price">{{destinations.price}}</p>
+            <p class="price" *ngIf="destinations.price > 0">{{destinations.price | currency: formatParamService.currency}}</p>
           </div>
           <button *ngIf="!isDestinationTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('destination', 'select', destinations)">Select</button>
           <button *ngIf="isDestinationTicketSelected" class="flight-info-ticket-select-btn" (click)="selectTicket('destination', 'edit')">Edit</button>

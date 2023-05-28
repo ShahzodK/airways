@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { ColorSchemeService } from 'app/core/services/color-scheme.service';
+import { MY_FORMATS } from 'app/search/consts/my_date';
 import { FormatParamService } from 'app/core/services/format-param.service';
 import { ordersCount } from 'app/redux/selectors/flights.selectors';
 import { AuthService } from 'app/user/services/auth.service';
@@ -71,6 +72,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  public changeDateFormat(format: string) {
+    MY_FORMATS.display.dateInput = format
+  }
   navigationByCart() {
     this.router.navigateByUrl('/booking/cart');
   }

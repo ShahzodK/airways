@@ -4,10 +4,12 @@
   align-items: center;
 }
 
-::ng-deep .mdc-tab {
-  height: 83px !important;
-  width: 225px !important;
-  border-left: 1px solid #cecece !important;
+.flight-info{
+  ::ng-deep .mdc-tab {
+    height: 83px !important;
+    width: 225px !important;
+    border-left: 1px solid #CECECE !important;
+  }
 }
 
 ::ng-deep .mdc-tab-indicator__content {

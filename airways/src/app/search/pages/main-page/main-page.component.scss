@@ -150,3 +150,10 @@
 .down {
   transform: rotate(45deg);
 }
+
+.no-flights {
+  display: block;
+  position: absolute;
+  bottom: 9px;
+  color: red;
+}

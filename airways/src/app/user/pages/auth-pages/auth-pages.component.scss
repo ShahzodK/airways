@@ -1,0 +1,28 @@
+.pop-up-login {
+  box-sizing: border-box;
+  position: absolute;
+  top: 81px;
+  left: 42%;
+  z-index: 101;
+  width: 494px;
+  padding: 32px 24px;
+  background: #ffffff;
+  border-radius: 8px;
+
+  ::ng-deep {
+    .mat-mdc-tab-labels {
+      border: 1px solid #cecece;
+      border-radius: 8px;
+    }
+
+    .mdc-button .mdc-button__label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mat-mdc-tab.mdc-tab {
+      height: 46px;
+    }
+  }
+}

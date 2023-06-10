@@ -1,0 +1,35 @@
+<div class="cart-wrapper">
+  <div class="cart-container">
+    <p class="cart-title">Cart</p>
+    <ng-container *ngIf="orders$ | async as orders">
+      <app-table-header
+        [orders]="orders"
+        (sendSelect)="selectOrder($event)"
+      ></app-table-header>
+      <div class="block-cart-result">
+        <p class="cart-add-trip" (click)="redirectionBySearch()">
+          + Add new trip
+        </p>
+        <div class="block-cart-total-cost">
+          <p class="cost-title">Total:</p>
+          <p class="cost-number">
+            {{
+              getTotalCost(orders) * format.getIndex()
+                | currency : format.currency : "symbol-narrow" : "1.2-2"
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="block-cart-payment">
+        <mat-form-field class="example-full-width">
+          <span matPrefix class="promo-prefix">APPLY</span>
+          <input type="tel" matInput placeholder="Promo Code" />
+        </mat-form-field>
+        <div class="block-payment-button">
+          <p class="selected-order">{{ countSelected }} selected</p>
+          <button class="button-payment" (click)="payOrder()">Payment</button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

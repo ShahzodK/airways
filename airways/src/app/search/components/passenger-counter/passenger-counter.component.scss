@@ -1,0 +1,33 @@
+.passenger-counter {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  &-block {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    justify-content: space-between;
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+    h4 {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+      color: #11397E;
+      margin-bottom: 0;
+    }
+    span {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+      color: #74767A;
+    }
+  }
+  // &-decrease, &-increase {
+  //   &:hover {
+  //     background: rgba(17, 57, 126, 0.3);
+  //   }
+  // }
+}

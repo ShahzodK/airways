@@ -1,0 +1,69 @@
+<section class="main">
+  <div class="search-form">
+    <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+      <div class="search-form-trip-type-field">
+        <mat-radio-group class="search-form-trip-type-block" formControlName="tripType">
+          <mat-radio-button class="search-form-trip-type" value="1" color="primary" (click)="changeTripType('round')">Round Trip</mat-radio-button>
+          <mat-radio-button class="search-form-trip-type" value="2" color="primary" (click)="changeTripType('one')">One Way</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="search-form-trip-location">
+            <input type="text"
+                   formControlName="departure"
+                   [matAutocomplete]="departureAuto"
+                   placeholder="Choose your departure"
+                   class="search-form-trip-location-departure search-form-trip-location-input" [value]="''">
+                   <span class="from input-text">From</span>
+          <input type="text"
+                 placeholder="Choose your destination"
+                 formControlName="destination"
+                 matInput
+                 [matAutocomplete]="destinationAuto"
+                 class="search-form-trip-location-destination search-form-trip-location-input">
+                 <span class="destination input-text">Destination</span>
+                 <p *ngIf="searchForm.get('destination')!.hasError('noFlights')" class="no-flights"> Route not found, please choose another route(e.g Dublin-Dubai)</p>
+          <mat-autocomplete #departureAuto="matAutocomplete">
+            <mat-option *ngFor="let departure of departures" [value]="departure">{{departure}}</mat-option>
+          </mat-autocomplete>
+          <mat-autocomplete #destinationAuto="matAutocomplete">
+            <mat-option *ngFor="let destination of destinations" [value]="destination">{{destination}}</mat-option>
+          </mat-autocomplete>
+        </div>
+        <div class="search-form-trip-info">
+          <mat-form-field class="search-form-trip-date" appearance="fill" floatLabel="always">
+            <ng-container *ngIf="isRoundTrip; else oneWay">
+              <mat-date-range-input [rangePicker]="picker" class="search-form-trip-date-range">
+                <input matStartDate class="search-form-trip-date-input" formControlName="start" matInput>
+                <input matEndDate class="search-form-trip-date-input" formControlName="end" matInput>
+              </mat-date-range-input>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+            </ng-container>
+            <ng-template #oneWay>
+              <input matInput [matDatepicker]="picker" formControlName="start">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </ng-template>
+          </mat-form-field>
+
+          <div class="search-form-trip-passenger">
+            <p class="arrow-container"><i class="arrow down"></i></p>
+            <input type="button"
+                   [matMenuTriggerFor]="menu"
+                   class="search-form-trip-passenger-dropdown"
+                   [value]="'Passengers' | totalPassengers: mainService.adultCount : mainService.childCount : mainService.infantCount"
+                   #passengersInput
+                   >
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="$event.stopPropagation()" class="passengers-item" (click)="updatePassengers()"><app-passenger-counter passengerType="Adults" passengerYear="14+"></app-passenger-counter></button>
+              <button mat-menu-item (click)="$event.stopPropagation()" class="passengers-item" (click)="updatePassengers()"><app-passenger-counter passengerType="Child" passengerYear="2-14"></app-passenger-counter></button>
+              <button mat-menu-item (click)="$event.stopPropagation()" class="passengers-item" (click)="updatePassengers()"><app-passenger-counter passengerType="Infant" passengerYear="0-2"></app-passenger-counter></button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="search-form-search-button-container">
+          <button class="search-form-search-button" mat-button>Search</button>
+        </div>
+    </form>
+  </div>
+</section>

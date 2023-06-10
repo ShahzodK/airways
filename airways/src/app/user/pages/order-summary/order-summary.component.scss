@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  padding: 40px 156px 48px 156px;
+}
+
+.block-preview {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  gap: 12px;
+}
+
+.preview-text {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #11397e;
+}
+
+.preview-img {
+  width: 24px;
+  height: 24px;
+}
+
+.block-orders {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 30px;
+}
+
+.block-orders-cost {
+  background: #ffffff;
+  border: 1px solid #e1e5eb;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 552px;
+  padding: 24px 72px 16px 40px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 40px 0 40px auto;
+}
+
+.container-orders-cost {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.block-cost-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.block-cost-fare,
+.block-cost-tax {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 40px;
+}
+
+.order-cost {
+  padding: 20px 0 20px 40px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.return-account {
+  color: #11397e;
+  font-weight: 500;
+  padding: 10px 0;
+  font-size: 20px;
+  cursor: pointer;
+}

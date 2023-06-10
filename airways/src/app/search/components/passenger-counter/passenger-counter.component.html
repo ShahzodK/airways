@@ -1,0 +1,16 @@
+<div class="passenger-counter-block">
+  <div class="passenger-counter-info">
+    <h4>{{this.passengerType}}</h4>
+    <span>{{this.passengerYear}} years</span>
+  </div>
+  <div class="passenger-counter">
+    <span class="passenger-counter-decrease" (click)="decrease()">&#8722;</span>
+    <ng-container [ngSwitch]="this.passengerType">
+      <span class="passenger-counter-number" *ngSwitchCase="'Adults'">{{this.mainService.adultCount}}</span>
+      <span class="passenger-counter-number" *ngSwitchCase="'Child'">{{this.mainService.childCount}}</span>
+      <span class="passenger-counter-number" *ngSwitchCase="'Infant'">{{this.mainService.infantCount}}</span>
+    </ng-container>
+
+    <span class="passenger-counter-increase" (click)="increase()">&#43;</span>
+  </div>
+</div>

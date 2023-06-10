@@ -1,0 +1,106 @@
+<div
+  [ngClass]="{
+    'background-opacity': isColorScheme,
+    'background-white': !isColorScheme
+  }"
+>
+  <header class="wrapper-header">
+    <div class="airways-icon" (click)="redirectToSearch()"></div>
+
+    <div
+      *ngIf="colorScheme.isInvisibilityStepper | async; else stepperBlock"
+      class="book-flights"
+    >
+      Book flights
+    </div>
+    <ng-template #stepperBlock>
+      <app-stepper></app-stepper>
+    </ng-template>
+
+    <div *ngIf="isColorScheme; else blockDark" class="block-light">
+      <div class="user-settings">
+        <mat-form-field appearance="fill" class="form-dateFormat">
+          <mat-select [(value)]="format.dateFormat">
+            <mat-option
+              value="MM/dd/YYYY"
+              (click)="changeDateFormat('MM-DD-YY')"
+              >MM/DD/YYYY</mat-option
+            >
+            <mat-option
+              value="dd/MM/YYYY"
+              (click)="changeDateFormat('DD-MM-YYYY')"
+              >DD/MM/YYYY</mat-option
+            >
+            <mat-option
+              value="YYY/dd/MM"
+              (click)="changeDateFormat('YYYY-DD-MM')"
+              >YYYY/DD/MM</mat-option
+            >
+            <mat-option
+              value="YYY/MM/dd"
+              (click)="changeDateFormat('YYYY-MM-DD')"
+              >YYYY/MM/DD</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-currency">
+          <mat-select [(value)]="format.currency">
+            <mat-option value="EUR">EUR</mat-option>
+            <mat-option value="USD">USA</mat-option>
+            <mat-option value="RUB">RUB</mat-option>
+            <mat-option value="PLN">PLN</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button mat-flat-button (click)="openUserSettings()">
+          <div class="button-icon"></div>
+          <p class="button-text">{{ userName }}</p>
+        </button>
+      </div>
+      <div
+        [matBadge]="ordersCount$ | async"
+        [matBadgeHidden]="(ordersCount$ | async) === 0"
+        matBadgeColor="warn"
+        class="basket"
+        (click)="navigationByCart()"
+      ></div>
+    </div>
+
+    <ng-template #blockDark>
+      <div class="block-dark">
+        <div class="user-settings">
+          <mat-form-field appearance="fill" class="form-dateFormat">
+            <mat-select [(value)]="format.dateFormat">
+              <mat-option value="MM/dd/YYYY">MM/DD/YYYY</mat-option>
+              <mat-option value="dd/MM/YYYY">DD/MM/YYYY</mat-option>
+              <mat-option value="YYY/dd/MM">YYYY/DD/MM</mat-option>
+              <mat-option value="YYY/MM/dd">YYYY/MM/DD</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-currency">
+            <mat-select [(value)]="format.currency">
+              <mat-option value="EUR">EUR</mat-option>
+              <mat-option value="USD">USA</mat-option>
+              <mat-option value="RUB">RUB</mat-option>
+              <mat-option value="PLN">PLN</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-flat-button (click)="openUserSettings()">
+            <div class="button-icon"></div>
+            <p class="button-text">{{ userName }}</p>
+          </button>
+        </div>
+        <div
+          [matBadge]="ordersCount$ | async"
+          [matBadgeHidden]="(ordersCount$ | async) === 0"
+          matBadgeColor="warn"
+          (click)="navigationByCart()"
+          class="basket"
+        ></div>
+      </div>
+    </ng-template>
+  </header>
+</div>

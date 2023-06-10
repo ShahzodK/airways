@@ -1,0 +1,93 @@
+<div class="block-preview">
+  <img src="../../../../assets/preview.svg" class="preview-img" />
+  <p class="preview-text">Summary</p>
+</div>
+
+<ng-container *ngIf="orders$ | async as order">
+  <div class="block-orders">
+    <ng-container
+      *ngIf="
+        order[auth.selected.oder]
+          .flightDetailsDeparture as flightDetailsDeparture
+      "
+    >
+      <ng-container
+        *ngIf="
+          order[auth.selected.oder]
+            .passengersDetailsDeparture as passengersDetailsDeparture
+        "
+      >
+        <app-order-card
+          [flightDetails]="flightDetailsDeparture"
+          [passengersDetails]="passengersDetailsDeparture"
+        ></app-order-card>
+      </ng-container>
+    </ng-container>
+
+    <ng-container
+      *ngIf="
+        order[auth.selected.oder]
+          .flightDetailsDestination as flightDetailsDestination
+      "
+    >
+      <ng-container
+        *ngIf="
+          order[auth.selected.oder]
+            .passengersDetailsDestination as passengersDetailsDestination
+        "
+      >
+        <app-order-card
+          [flightDetails]="flightDetailsDestination"
+          [passengersDetails]="passengersDetailsDestination"
+        ></app-order-card>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="block-orders-cost">
+    <ng-container *ngIf="order[auth.selected.oder].costTrip as costTrip">
+      <ng-container *ngFor="let cost of costTrip">
+        <div class="container-orders-cost">
+          <div class="block-cost-total">
+            <p>{{ cost.count }} x {{ cost.type }} Fare</p>
+            <p>
+              {{
+                cost.total
+                  | currency : format.currency : "symbol-narrow" : "1.2-2"
+              }}
+            </p>
+          </div>
+          <div class="block-cost-fare">
+            <p>Fare</p>
+            <p>
+              {{
+                cost.fare
+                  | currency : format.currency : "symbol-narrow" : "1.2-2"
+              }}
+            </p>
+          </div>
+          <div class="block-cost-tax">
+            <p>Tax & Service Charge</p>
+            <p>
+              {{
+                cost.tax
+                  | currency : format.currency : "symbol-narrow" : "1.2-2"
+              }}
+            </p>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="order-cost">
+        <p>Total:</p>
+        <p>
+          {{
+            getTotalCost(costTrip) * format.getIndex()
+              | currency : format.currency : "symbol-narrow" : "1.2-2"
+          }}
+        </p>
+      </div>
+    </ng-container>
+  </div>
+  <p class="return-account" (click)="returnToAccount()">Return to Account</p>
+</ng-container>

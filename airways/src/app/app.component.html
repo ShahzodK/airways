@@ -1,0 +1,15 @@
+<div
+  class="background"
+  [ngClass]="{
+    height: authService.isChangeHeightMain,
+    background: colorScheme.isColorScheme | async
+  }"
+>
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-auth-pages
+    *ngIf="authService.isLoginPageVisible | async"
+  ></app-auth-pages>
+</div>
+
+<app-footer></app-footer>

@@ -26,7 +26,7 @@ export class UserOrdersEffects {
           .set('Content-Type', 'application/json')
           .set('Authorization', `Bearer ${token}`);
         return this.http
-          .get<IUser>(`http://localhost:3000/users/${id}`, { headers })
+          .get<IUser>(`https://bored-puce-seahorse.cyclic.app//users/${id}`, { headers })
           .pipe(
             map((user: IUser) =>
               saveUserOrders({ userOrders: user.orders ?? [] })

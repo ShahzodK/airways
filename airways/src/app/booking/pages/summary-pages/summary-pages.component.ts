@@ -161,7 +161,7 @@ export class SummaryPagesComponent implements OnInit, OnDestroy {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
-    const url = `http://localhost:3000/users/${id}`;
+    const url = `https://bored-puce-seahorse.cyclic.app//users/${id}`;
     this.http
       .get<IUser>(url, { headers })
       .pipe(

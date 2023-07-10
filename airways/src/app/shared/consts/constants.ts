@@ -1,6 +1,6 @@
 import { MatDateFormats } from '@angular/material/core';
 
-export const api = 'http://localhost:3000';
+export const api = 'https://bored-puce-seahorse.cyclic.app/';
 
 export const MY_DATE_FORMATS: MatDateFormats = {
   parse: {

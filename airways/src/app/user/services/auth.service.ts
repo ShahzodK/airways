@@ -51,7 +51,7 @@ export class AuthService {
   }
 
   loginInUser(user: UserLogin) {
-    const url = 'http://localhost:3000/login';
+    const url = 'https://bored-puce-seahorse.cyclic.app//login';
     this.http
       .post<UserResponse>(url, user)
       .pipe(
@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   createUser(user: UserCreate) {
-    const url = 'http://localhost:3000/register';
+    const url = 'https://bored-puce-seahorse.cyclic.app//register';
     this.http.post<UserResponse>(url, user).subscribe((newUser) => {
       localStorage.setItem('userAirwaysToken', newUser.accessToken);
       localStorage.setItem('userAirwaysName', newUser.user.firstName);
